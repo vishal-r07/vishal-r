@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vishal Meyyappan | Portfolio with EDITH AI</title>
+    <title>Vishal Meyyappan | Portfolio with Enhanced EDITH AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Portfolio Styles */
+        /* Base Portfolio Styles */
         :root {
             --primary: #0a192f;
             --secondary: #112240;
@@ -375,80 +375,181 @@
         }
 
         /* Education & Experience */
-        .timeline {
+        .marvel-timeline {
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 3rem 0 2rem 0;
+            background: linear-gradient(120deg, #0a192f 80%, #9d4edd22 100%);
+            border-radius: 20px;
+            box-shadow: 0 0 40px #64ffda33, 0 0 0 4px #64ffda11;
+            margin-bottom: 4rem;
+            overflow: hidden;
         }
 
-        .timeline::before {
-            content: '';
+        .timeline-progress {
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
+            left: 50px;
+            top: 60px;
+            bottom: 60px;
+            width: 8px;
+            background: rgba(100,255,218,0.08);
+            border-radius: 4px;
+            z-index: 0;
         }
 
-        .timeline-item {
+        .timeline-bar {
+            width: 100%;
+            height: 0;
+            background: linear-gradient(180deg, #64ffda 0%, #9d4edd 100%);
+            border-radius: 4px;
+            box-shadow: 0 0 20px #64ffda99;
+            transition: height 2s cubic-bezier(.77,0,.18,1);
+        }
+
+        .timeline-missions {
             position: relative;
-            width: 50%;
-            padding: 2rem;
-            background: var(--secondary);
-            border-radius: 10px;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s;
-            transform: translateY(20px);
-            opacity: 0;
-        }
-
-        .timeline-item.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            top: 2rem;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--accent);
             z-index: 1;
-            box-shadow: 0 0 10px var(--accent);
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-left: 120px;
         }
 
-        .timeline-item:nth-child(odd)::before {
-            right: -10px;
+        .mission-card {
+            background: rgba(17,34,64,0.95);
+            border: 2px solid #64ffda;
+            border-radius: 18px;
+            box-shadow: 0 0 30px #64ffda22;
+            padding: 2rem 2.5rem 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
         }
 
-        .timeline-item:nth-child(even)::before {
-            left: -10px;
+        .mission-card .mission-icon {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #64ffda, #9d4edd);
+            color: #0a192f;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 0 20px #64ffda99;
+            border: 3px solid #fff3;
+            z-index: 2;
+            transition: box-shadow 0.3s;
         }
 
-        .timeline-content h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
+        .mission-card .mission-badge {
+            position: absolute;
+            top: 18px;
+            right: 30px;
+            background: linear-gradient(90deg, #FFD700, #64ffda);
+            color: #0a192f;
+            font-weight: bold;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            box-shadow: 0 0 10px #FFD70055;
+            letter-spacing: 1px;
         }
 
-        .timeline-content .date {
-            color: var(--highlight);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+        .mission-card .mission-content h3 {
+            color: #FFD700;
+            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .mission-card .date {
+            color: #64ffda;
+            font-size: 1rem;
+            margin-bottom: 0.7rem;
             display: block;
+        }
+
+        .mission-card .mission-content p {
+            color: #ccd6f6;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        .mission-card:hover, .mission-card:focus {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 0 40px #FFD70099, 0 0 0 4px #FFD70033;
+            z-index: 10;
+        }
+
+        .mission-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+
+        .secret-mission {
+            background: linear-gradient(120deg, #FFD700 60%, #9d4edd 100%);
+            color: #111 !important;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 40px #FFD70055;
+            position: relative;
+            overflow: visible;
+        }
+
+        .secret-mission .mission-content h3,
+        .secret-mission .mission-badge {
+            color: #9d4edd;
+            background: #fff;
+        }
+
+        .secret-mission .mission-icon {
+            background: linear-gradient(135deg, #FFD700, #9d4edd);
+            color: #fff;
+            box-shadow: 0 0 30px #FFD70099;
+        }
+
+        .claim-reward-btn {
+            animation: pulseGlow 1.2s infinite alternate;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .claim-reward-btn:hover {
+            background:linear-gradient(90deg,#64ffda,#FFD700);
+            color:#9d4edd;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px #FFD70055; }
+            100% { box-shadow: 0 0 30px #FFD700, 0 0 10px #64ffda; }
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 18px;
+            border-radius: 3px;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: confetti-fall 1.5s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-40px) rotate(0deg); }
+            100% { transform: translateY(300px) rotate(360deg); opacity:0; }
+        }
+
+        @media (max-width: 700px) {
+            .timeline-missions { margin-left: 0; }
+            .timeline-progress { left: 10px; }
+            .mission-card { padding: 2rem 1rem 2rem 3.5rem; }
+            .mission-card .mission-icon { left: -30px; width: 50px; height: 50px; font-size: 1.3rem; }
         }
 
         /* Skills Section */
@@ -925,6 +1026,10 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
+        .edith-logo.speaking {
+            animation: logoGlow 1.5s infinite alternate;
+        }
+
         .edith-title-text {
             font-size: 1.3rem;
             font-weight: 700;
@@ -1059,6 +1164,127 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
+        /* TTS Controls */
+        .tts-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 1.2rem;
+            background: rgba(10, 25, 47, 0.7);
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .tts-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--highlight);
+        }
+
+        .tts-toggle input {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            -webkit-appearance: none;
+            background: rgba(136, 146, 176, 0.2);
+            border-radius: 20px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tts-toggle input:checked {
+            background: var(--accent);
+        }
+
+        .tts-toggle input::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            background: var(--text);
+            transform: scale(1);
+            transition: all 0.3s;
+        }
+
+        .tts-toggle input:checked::before {
+            left: 22px;
+            background: var(--primary);
+        }
+
+        .voice-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: auto;
+            display: none; /* Hidden by default */
+        }
+
+        .voice-indicator span {
+            width: 4px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+            transform-origin: bottom;
+            animation: voicePulse 1.2s infinite ease-in-out;
+        }
+
+        .voice-indicator span:nth-child(1) { animation-delay: 0.1s; }
+        .voice-indicator span:nth-child(2) { animation-delay: 0.2s; height: 15px; }
+        .voice-indicator span:nth-child(3) { animation-delay: 0.3s; height: 10px; }
+        .voice-indicator span:nth-child(4) { animation-delay: 0.4s; height: 15px; }
+        .voice-indicator span:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Fast Mode Toggle */
+        .fast-mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--highlight);
+            margin-left: 15px;
+        }
+
+        .fast-mode-toggle input {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            -webkit-appearance: none;
+            background: rgba(136, 146, 176, 0.2);
+            border-radius: 20px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .fast-mode-toggle input:checked {
+            background: var(--purple);
+        }
+
+        .fast-mode-toggle input::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            background: var(--text);
+            transform: scale(1);
+            transition: all 0.3s;
+        }
+
+        .fast-mode-toggle input:checked::before {
+            left: 22px;
+            background: var(--primary);
+        }
+
+        /* New Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1069,19 +1295,100 @@
             50% { transform: translateY(-5px); }
         }
 
+        @keyframes voicePulse {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.3); }
+        }
+
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 5px var(--accent);
+            }
+            100% {
+                box-shadow: 0 0 20px var(--accent), 0 0 30px var(--purple);
+            }
+        }
+
         /* Responsive for EDITH */
         @media (max-width: 480px) {
             .edith-chat-container {
-                width: 90%;
-                height: 400px;
-                right: 5%;
-                bottom: 100px;
+                width: 98vw;
+                min-width: unset;
+                max-width: 100vw;
+                height: 60vh;
+                right: 1vw;
+                bottom: 80px;
+                border-radius: 12px;
+                padding: 0;
             }
+            .edith-chat-header {
+                padding: 0.7rem 0.7rem 0.7rem 1rem;
+            }
+            .edith-title-text {
+                font-size: 1.05rem;
+            }
+            .edith-chat-messages {
+                padding: 0.7rem;
+                font-size: 0.92rem;
+            }
+            .edith-input-container {
+                padding: 0.7rem;
+                gap: 6px;
+            }
+            .edith-input {
+                font-size: 0.92rem;
+                padding: 10px 12px;
+            }
+            .edith-send {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .tts-controls {
+                padding: 0 0.7rem 0.3rem 0.7rem;
+                flex-wrap: wrap;
+                font-size: 0.85rem;
+            }
+            .edith-audio-waveform {
+                height: 24px !important;
+                min-height: 20px;
+                max-height: 28px;
+                margin-bottom: 2px;
+            }
+            .hero-image {
+                position: relative !important;
+                width: 70vw !important;
+                max-width: 260px !important;
+                min-width: 140px;
+                margin: 18px auto 0 auto !important;
+                right: auto !important;
+                top: auto !important;
+                left: 0 !important;
+                transform: none !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            }
+            .hero-image img {
+                width: 100% !important;
+                height: auto !important;
+                border-radius: 12px !important;
+                display: block;
+            }
+            .hero-content {
+                margin-bottom: 0.5rem;
+            }
+        }
 
-            .edith-chat-icon {
-                width: 60px;
-                height: 60px;
-            }
+        /* Make waveform always fit container */
+        .edith-audio-waveform {
+            height: 36px;
+            display: none;
+            background: transparent;
+            margin: 0 auto 4px auto;
+            border-radius: 8px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -1161,36 +1468,56 @@
 
 <!-- Education & Experience -->
 <section id="education">
-    <div class="section-title">
-        <h2>Education & Experience</h2>
+    <div class="section-title">    
+        <h2><i class="fas fa-atom"></i> Education & Experience</h2>
     </div>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>Chennai Institute of Technology</h3>
-                <span class="date">2024 - 2028</span>
-                <p>B.E. Electronics and Communication Engineering</p>
-                <p>Specialization: Advanced Communication Technology</p>
-                <p>GPA: 8.35</p>
-            </div>
+    <div class="marvel-timeline">
+        <div class="timeline-progress">
+            <div class="timeline-bar"></div>
         </div>
-
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>TI School</h3>
-                <span class="date">2022 - 2024</span>
-                <p>Higher Secondary Education</p>
-                <p>Stream: Mathematics & Computer Science</p>
+        <div class="timeline-missions">
+            <div class="mission-card" data-mission="3">
+                <div class="mission-icon"><i class="fas fa-satellite-dish"></i></div>
+                <div class="mission-content">
+                    <h3>IMD Chennai - Internship</h3>
+                    <span class="date">May 2025 - June 2025</span>
+                    <p>Built Doppler weather radar using ESP32<br>
+                    Developed GUI, worked with motor precision</p>
+                </div>
+                <div class="mission-badge">Mission 1</div>
             </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <h3>IMD Chennai - Internship</h3>
-                <span class="date">May 2025 - June 2025</span>
-                <p>Built a working model of Doppler weather radar from scratch</p>
-                <p>Developed using ESP32 and created a GUI interface</p>
-                <p>Worked with motor precision under IMD and RMC guidelines</p>
+            <div class="mission-card" data-mission="2">
+                <div class="mission-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="mission-content">
+                    <h3>Chennai Institute of Technology</h3>
+                    <span class="date">2024 - 2028</span>
+                    <p>B.E. Electronics and Communication Engineering<br>
+                    Specialization: Advanced Communication Technology<br>
+                    GPA: 8.35</p>
+                </div>
+                <div class="mission-badge">Mission 2</div>
+            </div>
+            <div class="mission-card" data-mission="1">
+                <div class="mission-icon"><i class="fas fa-school"></i></div>
+                <div class="mission-content">
+                    <h3>TI School</h3>
+                    <span class="date">2022 - 2024</span>
+                    <p>Higher Secondary Education<br>
+                    Stream: Mathematics & Computer Science</p>
+                </div>
+                <div class="mission-badge">Mission 3</div>
+            </div>
+            <div class="mission-card secret-mission" data-mission="4">
+                <div class="mission-icon"><i class="fas fa-robot"></i></div>
+                <div class="mission-content" style="color:#111;">
+                    <h3 style="color:#111;">EDITH's Secret Unlocked!</h3>
+                    <span class="date" style="color:#222;">2025</span>
+                    <p style="color:#222;">Congratulations! You've completed all missions.<br>
+                    <strong style="color:#111;">EDITH:</strong> <span style="color:#222;">"The journey is just beginning, hero."</span></p>
+                    <button class="claim-reward-btn" style="margin-top:1rem; background:linear-gradient(90deg,#FFD700,#64ffda);color:#111;font-weight:bold;padding:0.6rem 1.5rem;border:none;border-radius:20px;box-shadow:0 0 10px #FFD70055;cursor:pointer;font-size:1.1rem;">Claim Reward</button>
+                </div>
+                <div class="mission-badge">Secret</div>
+                <div class="confetti" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;"></div>
             </div>
         </div>
     </div>
@@ -1532,6 +1859,24 @@
                 </ul>
             </div>
         </div>
+        <div class="edith-audio-waveform" id="edithAudioWaveform" style="display:none;width:100%;height:36px;background:transparent;"></div>
+        <div class="tts-controls">
+            <div class="tts-toggle">
+                <label for="tts-toggle">Voice Assistant:</label>
+                <input type="checkbox" id="tts-toggle" checked>
+            </div>
+            <div class="fast-mode-toggle">
+                <label for="fast-mode">Fast Mode:</label>
+                <input type="checkbox" id="fast-mode">
+            </div>
+            <div class="voice-indicator" id="voiceIndicator">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
         <div class="edith-input-container">
             <input type="text" class="edith-input" id="edithInput" placeholder="Type your message here...">
             <button class="edith-send" id="edithSend">
@@ -1540,6 +1885,11 @@
         </div>
     </div>
 </div>
+
+<!-- Theme Audio -->
+<audio id="edith-theme" preload="auto">
+    <source src="data/EDITHbgm.mp3" type="audio/mpeg">
+</audio>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
@@ -1749,13 +2099,18 @@
     const edithChatMessages = document.getElementById('edithChatMessages');
     const edithInput = document.getElementById('edithInput');
     const edithSend = document.getElementById('edithSend');
+    const ttsToggle = document.getElementById('tts-toggle');
+    const voiceIndicator = document.getElementById('voiceIndicator');
+    const fastModeToggle = document.getElementById('fast-mode');
+    const edithLogo = document.querySelector('.edith-logo');
+    const edithTheme = document.getElementById('edith-theme');
 
     // EDITH responses
     const responses = {
-        "hello": "Hello! I'm EDITH, your personal AI assistant. How can I help you with Vishal's portfolio?",
+        "hello": "Hello! I'm EDITH,personal AI assistant. How can I help you with Vishal's portfolio?",
         "hi": "Hi there! How can I assist you today?",
-        "naa dan batman": "apo naa dan spider-man hu!!!",
-        "who are you": "I am EDITH (Enhanced Digital Interface for Tech & Help), an AI assistant created to help you navigate Vishal's portfolio. My design is inspired by Stark Industries technology ( MARVEL ).",
+        "naa dan batman": "naa dan spider-man",
+        "who are you": "I am EDITH (Enhanced Digital Interface for Tech & Help), an AI assistant created to help you navigate Vishal's portfolio. My design is inspired by Stark Industries technology.",
         "skills": "<strong>Vishal's Technical Skills:</strong><br>" +
             "• <span style='color:#64ffda'>Hardware & Embedded:</span> ESP32 (90%), Arduino (85%), Embedded Systems (80%)<br>" +
             "• <span style='color:#64ffda'>Programming:</span> C/C++ (95%), Python (90%), Java (75%), SQL (70%)<br>" +
@@ -1788,11 +2143,9 @@
             "• Photography Club President at TI School",
         "projects": "<strong>Featured Projects:</strong><br>" +
             "• <span style='color:#64ffda'>Doppler Weather Radar Model</span> - Built during IMD Chennai internship<br>" +
-            "&nbsp;&nbsp;Developed using ESP32 with custom GUI<br><br>" +
-            "• <span style='color:#64ffda'>Smart Home Automation System</span> - IoT project using Arduino<br>" +
-            "&nbsp;&nbsp;Integrated with mobile app for remote control<br><br>" +
-            "• <span style='color:#64ffda'>AI-Powered Health Monitor</span> - Machine learning project<br>" +
-            "&nbsp;&nbsp;Predictive health analysis using vital signs",
+            "&nbsp;&nbsp;Developed using ESP32 with custom GUI<br><br>"  +
+            "• <span style='color:#64ffda'>Ultrasonic Sensor based radar detection for obstacle avoidance</span> - IOT project<br>" +
+            "&nbsp;&nbsp;Predictive target by fixing at the purticular angle rotation",
         "about vishal": "<strong>About Vishal Meyyappan R.:</strong><br>" +
             "• Second-year Electronics and Communication Engineering student<br>" +
             "• Passionate about embedded systems, IoT, and AI integration<br>" +
@@ -1810,14 +2163,100 @@
             "• 'About Vishal' - Learn more about Vishal"
     };
 
+    // Thinking messages for typing simulation
+    const thinkingMessages = [
+        "Hmm... accessing memory modules ● ● ●",
+        "Processing request... cross-referencing databases ● ● ●",
+        "Analyzing query parameters ● ● ●",
+        "Compiling response from neural network ● ● ●",
+        "Just a moment... calculating optimal answer ● ● ●",
+        "Interesting question... searching knowledge base ● ● ●"
+    ];
+
     // Toggle chat container
     edithChatIcon.addEventListener('click', () => {
         edithChatContainer.classList.add('open');
+        // Play theme on open
+        edithTheme.currentTime = 0;
+        edithTheme.volume = 0.3;
+        edithTheme.play().catch(e => console.log("Audio play failed:", e));
     });
 
     edithClose.addEventListener('click', () => {
         edithChatContainer.classList.remove('open');
+        // Stop any ongoing speech when closing
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            voiceIndicator.style.display = 'none';
+            edithLogo.classList.remove('speaking');
+        }
     });
+
+    // Strip HTML tags for TTS
+    function stripHtml(html) {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
+    }
+
+    // Text-to-Speech Function with expressive settings
+    function speakText(text) {
+        // Cancel any ongoing speech
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+        }
+
+        // Strip HTML tags
+        const cleanText = stripHtml(text);
+
+        // Create utterance
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+
+        // Configure voice settings for expressiveness
+        utterance.lang = 'en-US';
+        utterance.rate = 1.05;   // Slightly faster than normal
+        utterance.pitch = 1.2;    // Higher pitch for expressiveness
+        utterance.volume = 0.95;  // Slightly reduced volume
+
+        // Set voice to a more natural-sounding one if available
+        const voices = speechSynthesis.getVoices();
+        const preferredVoices = [
+            "Microsoft Zira",
+            "Google UK English Female",
+            "Alex",
+            "Samantha"
+        ];
+
+        // Find the best available voice
+        for (const voice of voices) {
+            if (preferredVoices.includes(voice.name)) {
+                utterance.voice = voice;
+                break;
+            }
+        }
+
+        // Show voice animation while speaking
+        voiceIndicator.style.display = 'flex';
+        edithLogo.classList.add('speaking');
+
+        // Event when speech starts
+        utterance.onstart = () => {
+            voiceIndicator.style.display = 'flex';
+            edithLogo.classList.add('speaking');
+        };
+
+        // Event when speech ends
+        utterance.onend = () => {
+            voiceIndicator.style.display = 'none';
+            edithLogo.classList.remove('speaking');
+            stopWaveform();
+        };
+
+        // Show waveform
+        startWaveform();
+
+        // Speak the text
+        speechSynthesis.speak(utterance);
+    }
 
     // Add message to chat
     function addMessage(text, isUser = false) {
@@ -1838,19 +2277,28 @@
 
         edithChatMessages.appendChild(messageDiv);
         edithChatMessages.scrollTop = edithChatMessages.scrollHeight;
+
+        // Speak EDITH's response if TTS is enabled
+        if (!isUser && ttsToggle.checked) {
+            speakText(text);
+        }
     }
 
-    // Show typing indicator
+    // Show typing indicator with a random thinking message
     function showTyping() {
         const typingDiv = document.createElement('div');
         typingDiv.classList.add('edith-typing');
-        typingDiv.innerHTML = 'EDITH is typing <span></span><span></span><span></span>';
+
+        // Select a random thinking message
+        const thinkingMessage = thinkingMessages[Math.floor(Math.random() * thinkingMessages.length)];
+
+        typingDiv.innerHTML = thinkingMessage;
         edithChatMessages.appendChild(typingDiv);
         edithChatMessages.scrollTop = edithChatMessages.scrollHeight;
         return typingDiv;
     }
 
-    // Process user input
+    // Process user input with typing simulation
     function processInput() {
         const input = edithInput.value.trim().toLowerCase();
         if (!input) return;
@@ -1861,6 +2309,9 @@
 
         // Show typing indicator
         const typing = showTyping();
+
+        // Determine delay based on fast mode
+        const delay = fastModeToggle.checked ? 500 : 1500;
 
         // Process after a short delay to simulate thinking
         setTimeout(() => {
@@ -1878,7 +2329,7 @@
 
             // Add EDITH response
             addMessage(response);
-        }, 1500);
+        }, delay);
     }
 
     // Event listeners for EDITH
@@ -1890,10 +2341,135 @@
         }
     });
 
+    // Toggle TTS functionality
+    ttsToggle.addEventListener('change', () => {
+        if (!ttsToggle.checked && speechSynthesis.speaking) {
+            speechSynthesis.cancel();
+            voiceIndicator.style.display = 'none';
+            edithLogo.classList.remove('speaking');
+        }
+    });
+
     // Add initial welcome message
     setTimeout(() => {
         addMessage("Welcome to Vishal's portfolio! I'm EDITH, your AI assistant. How can I help you explore his work and achievements?");
     }, 1000);
+
+    // Preload voices for TTS
+    window.speechSynthesis.onvoiceschanged = function() {
+        // This ensures voices are loaded and available
+    };
+
+    // Marvel Timeline Animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const missionCards = document.querySelectorAll('.mission-card');
+        const timelineBar = document.querySelector('.timeline-bar');
+        let revealed = 0;
+
+        function revealMissions() {
+            let delay = 0;
+            missionCards.forEach((card, idx) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                    revealed = idx + 1;
+                    // Animate progress bar
+                    if (timelineBar) {
+                        timelineBar.style.height = ((revealed / missionCards.length) * 100) + '%';
+                    }
+                }, 400 + idx * 400);
+            });
+        }
+
+        // Reveal on scroll into view
+        const timelineSection = document.querySelector('#education');
+        if (timelineSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        revealMissions();
+                        observer.unobserve(timelineSection);
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(timelineSection);
+        }
+
+        // Optional: Easter egg animation for secret mission
+        const secretMission = document.querySelector('.secret-mission');
+        if (secretMission) {
+            secretMission.addEventListener('mouseenter', () => {
+                secretMission.style.boxShadow = '0 0 60px #FFD700, 0 0 0 8px #FFD70033';
+            });
+            secretMission.addEventListener('mouseleave', () => {
+                secretMission.style.boxShadow = '0 0 40px #FFD70055';
+            });
+        }
+    });
+
+    // Gamified confetti effect for secret mission
+    document.querySelectorAll('.claim-reward-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const card = btn.closest('.secret-mission');
+            const confetti = card.querySelector('.confetti');
+            confetti.innerHTML = '';
+            confetti.style.display = 'block';
+            for(let i=0;i<40;i++){
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random()*90+5+'%';
+                piece.style.background = `linear-gradient(135deg, #FFD700, #64ffda, #9d4edd)`;
+                piece.style.animationDelay = (Math.random()*0.7)+'s';
+                confetti.appendChild(piece);
+            }
+            setTimeout(()=>{ confetti.style.display='none'; }, 2000);
+        });
+    });
+
+    // Audio waveform animation for EDITH TTS
+    const edithAudioWaveform = document.getElementById('edithAudioWaveform');
+    let waveformInterval = null;
+    function startWaveform() {
+        edithAudioWaveform.style.display = 'block';
+        const ctx = edithAudioWaveform.getContext('2d');
+        let t = 0;
+        function draw() {
+            ctx.clearRect(0, 0, edithAudioWaveform.width, edithAudioWaveform.height);
+            const bars = 32;
+            const w = edithAudioWaveform.width / bars;
+            for (let i = 0; i < bars; i++) {
+                const h = 10 + Math.abs(Math.sin(t + i/3 + Math.sin(t/2 + i))) * 18 + Math.random()*6;
+                ctx.fillStyle = `rgba(100,255,218,0.8)`;
+                ctx.fillRect(i * w + 2, edithAudioWaveform.height/2 - h/2, w-4, h);
+            }
+            t += 0.13;
+        }
+        if (!edithAudioWaveform.width) {
+            edithAudioWaveform.width = edithAudioWaveform.offsetWidth;
+            edithAudioWaveform.height = edithAudioWaveform.offsetHeight;
+        }
+        waveformInterval = setInterval(draw, 40);
+    }
+    function stopWaveform() {
+        edithAudioWaveform.style.display = 'none';
+        if (waveformInterval) clearInterval(waveformInterval);
+        waveformInterval = null;
+    }
+    // Also stop waveform if TTS is cancelled
+    if (window.speechSynthesis) {
+        const origCancel = window.speechSynthesis.cancel;
+        window.speechSynthesis.cancel = function() {
+            stopWaveform();
+            return origCancel.apply(this, arguments);
+        };
+    }
+
+    // In JS, make waveform canvas always fit container on resize
+    window.addEventListener('resize', function() {
+        if (edithAudioWaveform) {
+            edithAudioWaveform.width = edithAudioWaveform.offsetWidth;
+            edithAudioWaveform.height = edithAudioWaveform.offsetHeight;
+        }
+    });
 </script>
 </body>
 </html>
