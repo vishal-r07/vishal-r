@@ -1,2475 +1,2424 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vishal Meyyappan | Portfolio with Enhanced EDITH AI</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Base Portfolio Styles */
-        :root {
-            --primary: #0a192f;
-            --secondary: #112240;
-            --accent: #64ffda;
-            --text: #ccd6f6;
-            --highlight: #8892b0;
-            --success: #3ddc97;
-            --warning: #ffd166;
-            --danger: #ef476f;
-            --purple: #9d4edd;
-            --edith-gold: #FFD700;
-            --edith-red: #FF4D4D;
-            --edith-blue: #4D79FF;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--primary), #020c1b);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Particle canvas */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -2;
-        }
-
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(10, 25, 47, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            z-index: 10;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero h1 span {
-            color: var(--accent);
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .hero h2 {
-            font-size: 1.8rem;
-            color: var(--highlight);
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.5s ease;
-        }
-
-        .btn:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
-        }
-
-        .btn-secondary {
-            border: 1px solid var(--accent);
-            color: var(--accent);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(100, 255, 218, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .hero-image {
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40%;
-            max-width: 500px;
-            z-index: 5;
-            animation: float 6s ease-in-out infinite;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            border: 3px solid var(--accent);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            opacity: 0.3;
-            filter: blur(50px);
-            z-index: -1;
-        }
-
-        /* Stats Section */
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            background: var(--secondary);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem auto;
-            max-width: 1200px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .stat-item {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: var(--highlight);
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 10%;
-            position: relative;
-            z-index: 5;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            display: inline-block;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .about-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .tech-pill {
-            background: rgba(100, 255, 218, 0.1);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            cursor: default;
-        }
-
-        .tech-pill:hover {
-            transform: translateY(-3px);
-            background: rgba(100, 255, 218, 0.2);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
-        }
-
-        .about-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            border: 3px solid var(--accent);
-            position: relative;
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s;
-        }
-
-        .about-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Education & Experience */
-        .marvel-timeline {
-            position: relative;
-            padding: 3rem 0 2rem 0;
-            background: linear-gradient(120deg, #0a192f 80%, #9d4edd22 100%);
-            border-radius: 20px;
-            box-shadow: 0 0 40px #64ffda33, 0 0 0 4px #64ffda11;
-            margin-bottom: 4rem;
-            overflow: hidden;
-        }
-
-        .timeline-progress {
-            position: absolute;
-            left: 50px;
-            top: 60px;
-            bottom: 60px;
-            width: 8px;
-            background: rgba(100,255,218,0.08);
-            border-radius: 4px;
-            z-index: 0;
-        }
-
-        .timeline-bar {
-            width: 100%;
-            height: 0;
-            background: linear-gradient(180deg, #64ffda 0%, #9d4edd 100%);
-            border-radius: 4px;
-            box-shadow: 0 0 20px #64ffda99;
-            transition: height 2s cubic-bezier(.77,0,.18,1);
-        }
-
-        .timeline-missions {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-            margin-left: 120px;
-        }
-
-        .mission-card {
-            background: rgba(17,34,64,0.95);
-            border: 2px solid #64ffda;
-            border-radius: 18px;
-            box-shadow: 0 0 30px #64ffda22;
-            padding: 2rem 2.5rem 2rem 5rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s, box-shadow 0.4s;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-        }
-
-        .mission-card .mission-icon {
-            position: absolute;
-            left: -40px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, #64ffda, #9d4edd);
-            color: #0a192f;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            box-shadow: 0 0 20px #64ffda99;
-            border: 3px solid #fff3;
-            z-index: 2;
-            transition: box-shadow 0.3s;
-        }
-
-        .mission-card .mission-badge {
-            position: absolute;
-            top: 18px;
-            right: 30px;
-            background: linear-gradient(90deg, #FFD700, #64ffda);
-            color: #0a192f;
-            font-weight: bold;
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            font-size: 1rem;
-            box-shadow: 0 0 10px #FFD70055;
-            letter-spacing: 1px;
-        }
-
-        .mission-card .mission-content h3 {
-            color: #FFD700;
-            margin-bottom: 0.3rem;
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-        }
-
-        .mission-card .date {
-            color: #64ffda;
-            font-size: 1rem;
-            margin-bottom: 0.7rem;
-            display: block;
-        }
-
-        .mission-card .mission-content p {
-            color: #ccd6f6;
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        .mission-card:hover, .mission-card:focus {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 0 40px #FFD70099, 0 0 0 4px #FFD70033;
-            z-index: 10;
-        }
-
-        .mission-card.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            transition: opacity 0.7s, transform 0.7s;
-        }
-
-        .secret-mission {
-            background: linear-gradient(120deg, #FFD700 60%, #9d4edd 100%);
-            color: #111 !important;
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 40px #FFD70055;
-            position: relative;
-            overflow: visible;
-        }
-
-        .secret-mission .mission-content h3,
-        .secret-mission .mission-badge {
-            color: #9d4edd;
-            background: #fff;
-        }
-
-        .secret-mission .mission-icon {
-            background: linear-gradient(135deg, #FFD700, #9d4edd);
-            color: #fff;
-            box-shadow: 0 0 30px #FFD70099;
-        }
-
-        .claim-reward-btn {
-            animation: pulseGlow 1.2s infinite alternate;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .claim-reward-btn:hover {
-            background:linear-gradient(90deg,#64ffda,#FFD700);
-            color:#9d4edd;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 10px #FFD70055; }
-            100% { box-shadow: 0 0 30px #FFD700, 0 0 10px #64ffda; }
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 18px;
-            border-radius: 3px;
-            opacity: 0.8;
-            pointer-events: none;
-            animation: confetti-fall 1.5s linear forwards;
-        }
-
-        @keyframes confetti-fall {
-            0% { transform: translateY(-40px) rotate(0deg); }
-            100% { transform: translateY(300px) rotate(360deg); opacity:0; }
-        }
-
-        @media (max-width: 700px) {
-            .timeline-missions { margin-left: 0; }
-            .timeline-progress { left: 10px; }
-            .mission-card { padding: 2rem 1rem 2rem 3.5rem; }
-            .mission-card .mission-icon { left: -30px; width: 50px; height: 50px; font-size: 1.3rem; }
-        }
-
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--secondary);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            transition: all 0.5s;
-            transform: translateY(20px);
-            opacity: 0;
-        }
-
-        .skill-category.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .skill-category h3 {
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .skill-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-bar {
-            height: 10px;
-            background: rgba(136, 146, 176, 0.2);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            border-radius: 5px;
-            width: 0;
-            transition: width 1.5s ease-out;
-        }
-
-        /* Certificates & Achievements */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .achievement-card {
-            background: var(--secondary);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            transform: translateY(20px);
-            opacity: 0;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .achievement-card.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.2);
-            z-index: 10;
-        }
-
-        .achievement-icon {
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(157, 78, 221, 0.1));
-            font-size: 3rem;
-            color: var(--accent);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .achievement-icon::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.2), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-        }
-
-        .achievement-card:hover .achievement-icon::before {
-            top: -100%;
-            left: -100%;
-        }
-
-        .achievement-content {
-            padding: 1.5rem;
-        }
-
-        .achievement-content h3 {
-            margin-bottom: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .achievement-card:hover .achievement-content h3 {
-            color: var(--accent);
-        }
-
-        .achievement-content .date {
-            color: var(--highlight);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(100, 255, 218, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--accent);
-            transition: all 0.3s;
-        }
-
-        .contact-item:hover .contact-icon {
-            transform: scale(1.1);
-            background: var(--accent);
-            color: var(--primary);
-        }
-
-        .contact-text h3 {
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-text a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: opacity 0.3s;
-            position: relative;
-        }
-
-        .contact-text a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .contact-text a:hover::after {
-            width: 100%;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(136, 146, 176, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--accent);
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .social-icon:hover {
-            background: var(--accent);
-            color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
-        }
-
-        .contact-form {
-            background: var(--secondary);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(136, 146, 176, 0.3);
-            background: rgba(10, 25, 47, 0.5);
-            border-radius: 5px;
-            color: var(--text);
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--secondary);
-            padding: 2rem 10%;
-            text-align: center;
-            border-top: 1px solid rgba(100, 255, 218, 0.1);
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer-text {
-            color: var(--highlight);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes float {
-            0% {
-                transform: translateY(-50%) translateX(0);
-            }
-            50% {
-                transform: translateY(-50%) translateX(20px);
-            }
-            100% {
-                transform: translateY(-50%) translateX(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes typewriter {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent) }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 8rem;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vishal Meyyappan | Portfolio with Enhanced EDITH AI</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            /* Base Portfolio Styles */
+            :root {
+                --primary: #0a192f;
+                --secondary: #112240;
+                --accent: #64ffda;
+                --text: #ccd6f6;
+                --highlight: #8892b0;
+                --success: #3ddc97;
+                --warning: #ffd166;
+                --danger: #ef476f;
+                --purple: #9d4edd;
+                --edith-gold: #FFD700;
+                --edith-red: #FF4D4D;
+                --edith-blue: #4D79FF;
             }
 
-            .hero-content {
-                margin-bottom: 3rem;
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
 
-            .hero-image {
+            body {
+                background: linear-gradient(135deg, var(--primary), #020c1b);
+                color: var(--text);
+                min-height: 100vh;
+                overflow-x: hidden;
                 position: relative;
-                width: 80%;
-                right: auto;
-                top: auto;
-                transform: none;
-                margin: 0 auto;
             }
 
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-item {
+            /* Particle canvas */
+            #particles-js {
+                position: fixed;
                 width: 100%;
-                padding-left: 50px;
-                padding-right: 25px;
-            }
-
-            .timeline-item:nth-child(even) {
+                height: 100%;
+                top: 0;
                 left: 0;
+                z-index: -2;
             }
 
-            .timeline-item::before {
-                left: 10px !important;
+            /* Header & Navigation */
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                padding: 1.5rem 5%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 100;
+                background: rgba(10, 25, 47, 0.9);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(100, 255, 218, 0.1);
             }
-        }
 
-        @media (max-width: 768px) {
-            .stats {
-                flex-direction: column;
+            .logo {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: var(--accent);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+            }
+
+            .logo i {
+                margin-right: 10px;
+                animation: pulse 2s infinite;
+            }
+
+            .nav-links {
+                display: flex;
                 gap: 2rem;
             }
 
+            .nav-links a {
+                color: var(--text);
+                text-decoration: none;
+                font-weight: 500;
+                position: relative;
+                padding: 0.5rem 0;
+                transition: all 0.3s;
+            }
+
+            .nav-links a:hover {
+                color: var(--accent);
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--accent);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            /* Hero Section */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                padding: 0 10%;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero-content {
+                max-width: 700px;
+                z-index: 10;
+            }
+
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+                line-height: 1.2;
+            }
+
+            .hero h1 span {
+                color: var(--accent);
+                position: relative;
+                display: inline-block;
+            }
+
+            .hero h1 span::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: var(--accent);
+                border-radius: 2px;
             }
 
             .hero h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+                color: var(--highlight);
+                margin-bottom: 2rem;
+                font-weight: 400;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                line-height: 1.6;
+            }
+
+            .hero-buttons {
+                display: flex;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s;
+                display: inline-block;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+            }
+
+            .btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.1);
+                z-index: -1;
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform 0.5s ease;
+            }
+
+            .btn:hover::before {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+
+            .btn-primary {
+                background: var(--accent);
+                color: var(--primary);
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+            }
+
+            .btn-secondary {
+                border: 1px solid var(--accent);
+                color: var(--accent);
+            }
+
+            .btn-secondary:hover {
+                background: rgba(100, 255, 218, 0.1);
+                transform: translateY(-3px);
+            }
+
+            .hero-image {
+                position: absolute;
+                right: 5%;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40%;
+                max-width: 500px;
+                z-index: 5;
+                animation: float 6s ease-in-out infinite;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                border: 3px solid var(--accent);
+            }
+
+            .hero-image img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .hero-image::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+                opacity: 0.3;
+                filter: blur(50px);
+                z-index: -1;
+            }
+
+            /* Stats Section */
+            .stats {
+                display: flex;
+                justify-content: space-around;
+                background: var(--secondary);
+                padding: 2rem;
+                border-radius: 15px;
+                margin: 2rem auto;
+                max-width: 1200px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(100, 255, 218, 0.1);
+                position: relative;
+                overflow: hidden;
+                z-index: 10;
+            }
+
+            .stat-item {
+                text-align: center;
+                position: relative;
+                z-index: 1;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: var(--accent);
+                margin-bottom: 0.5rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+                color: var(--highlight);
+            }
+
+            /* Sections */
+            section {
+                padding: 6rem 10%;
+                position: relative;
+                z-index: 5;
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 4rem;
+                position: relative;
             }
 
             .section-title h2 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                display: inline-block;
+                position: relative;
+                padding-bottom: 1rem;
             }
-        }
 
-        /* EDITH AI Assistant Styles */
-        .edith-assistant {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-
-        .edith-chat-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 25px rgba(100, 255, 218, 0.4);
-            animation: pulse 2s infinite;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .edith-chat-icon::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-        }
-
-        .edith-chat-icon:hover::before {
-            top: -100%;
-            left: -100%;
-        }
-
-        .edith-chat-icon i {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        .edith-chat-container {
-            position: fixed;
-            bottom: 120px;
-            right: 30px;
-            width: 350px;
-            height: 450px;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            z-index: 1000;
-            transform: scale(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease;
-        }
-
-        .edith-chat-container.open {
-            transform: scale(1);
-        }
-
-        .edith-chat-header {
-            padding: 1.2rem;
-            background: linear-gradient(90deg, rgba(10, 25, 47, 0.9), rgba(157, 78, 221, 0.2));
-            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .edith-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .edith-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary);
-            box-shadow: 0 0 15px var(--accent);
-        }
-
-        .edith-logo.speaking {
-            animation: logoGlow 1.5s infinite alternate;
-        }
-
-        .edith-title-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--edith-gold), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .edith-close {
-            background: rgba(239, 71, 111, 0.2);
-            border: 1px solid var(--danger);
-            color: var(--danger);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-
-        .edith-close:hover {
-            background: rgba(239, 71, 111, 0.4);
-            transform: rotate(90deg);
-            box-shadow: 0 0 15px var(--danger);
-        }
-
-        .edith-chat-messages {
-            flex: 1;
-            padding: 1.2rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .edith-message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 15px;
-            position: relative;
-            animation: fadeIn 0.3s ease-out;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
-
-        .edith-response {
-            background: rgba(157, 78, 221, 0.15);
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-
-        .user-message {
-            background: rgba(100, 255, 218, 0.1);
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-
-        .edith-typing {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--highlight);
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        .edith-typing span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-
-        .edith-typing span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .edith-typing span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .edith-input-container {
-            padding: 1rem;
-            background: rgba(10, 25, 47, 0.7);
-            border-top: 1px solid rgba(100, 255, 218, 0.2);
-            display: flex;
-            gap: 10px;
-        }
-
-        .edith-input {
-            flex: 1;
-            padding: 12px 16px;
-            background: rgba(10, 25, 47, 0.6);
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            border-radius: 50px;
-            color: var(--text);
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .edith-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
-        }
-
-        .edith-send {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            border: none;
-            color: var(--primary);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .edith-send:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--accent);
-        }
-
-        /* TTS Controls */
-        .tts-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 1.2rem;
-            background: rgba(10, 25, 47, 0.7);
-            border-top: 1px solid rgba(100, 255, 218, 0.2);
-            padding-bottom: 0.5rem;
-        }
-
-        .tts-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--highlight);
-        }
-
-        .tts-toggle input {
-            position: relative;
-            width: 40px;
-            height: 20px;
-            -webkit-appearance: none;
-            background: rgba(136, 146, 176, 0.2);
-            border-radius: 20px;
-            outline: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .tts-toggle input:checked {
-            background: var(--accent);
-        }
-
-        .tts-toggle input::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            background: var(--text);
-            transform: scale(1);
-            transition: all 0.3s;
-        }
-
-        .tts-toggle input:checked::before {
-            left: 22px;
-            background: var(--primary);
-        }
-
-        .voice-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-left: auto;
-            display: none; /* Hidden by default */
-        }
-
-        .voice-indicator span {
-            width: 4px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 2px;
-            transform-origin: bottom;
-            animation: voicePulse 1.2s infinite ease-in-out;
-        }
-
-        .voice-indicator span:nth-child(1) { animation-delay: 0.1s; }
-        .voice-indicator span:nth-child(2) { animation-delay: 0.2s; height: 15px; }
-        .voice-indicator span:nth-child(3) { animation-delay: 0.3s; height: 10px; }
-        .voice-indicator span:nth-child(4) { animation-delay: 0.4s; height: 15px; }
-        .voice-indicator span:nth-child(5) { animation-delay: 0.5s; }
-
-        /* Fast Mode Toggle */
-        .fast-mode-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--highlight);
-            margin-left: 15px;
-        }
-
-        .fast-mode-toggle input {
-            position: relative;
-            width: 40px;
-            height: 20px;
-            -webkit-appearance: none;
-            background: rgba(136, 146, 176, 0.2);
-            border-radius: 20px;
-            outline: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .fast-mode-toggle input:checked {
-            background: var(--purple);
-        }
-
-        .fast-mode-toggle input::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            background: var(--text);
-            transform: scale(1);
-            transition: all 0.3s;
-        }
-
-        .fast-mode-toggle input:checked::before {
-            left: 22px;
-            background: var(--primary);
-        }
-
-        /* New Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes typing {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        @keyframes voicePulse {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(0.3); }
-        }
-
-        @keyframes logoGlow {
-            0% {
-                box-shadow: 0 0 5px var(--accent);
+            .section-title h2::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background: var(--accent);
+                border-radius: 2px;
             }
-            100% {
-                box-shadow: 0 0 20px var(--accent), 0 0 30px var(--purple);
-            }
-        }
 
-        /* Responsive for EDITH */
-        @media (max-width: 480px) {
-            .edith-chat-container {
-                width: 98vw;
-                min-width: unset;
-                max-width: 100vw;
-                height: 60vh;
-                right: 1vw;
-                bottom: 80px;
-                border-radius: 12px;
-                padding: 0;
-            }
-            .edith-chat-header {
-                padding: 0.7rem 0.7rem 0.7rem 1rem;
-            }
-            .edith-title-text {
-                font-size: 1.05rem;
-            }
-            .edith-chat-messages {
-                padding: 0.7rem;
-                font-size: 0.92rem;
-            }
-            .edith-input-container {
-                padding: 0.7rem;
-                gap: 6px;
-            }
-            .edith-input {
-                font-size: 0.92rem;
-                padding: 10px 12px;
-            }
-            .edith-send {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-            .tts-controls {
-                padding: 0 0.7rem 0.3rem 0.7rem;
-                flex-wrap: wrap;
-                font-size: 0.85rem;
-            }
-            .edith-audio-waveform {
-                height: 24px !important;
-                min-height: 20px;
-                max-height: 28px;
-                margin-bottom: 2px;
-            }
-            .hero-image {
-                position: relative !important;
-                width: 70vw !important;
-                max-width: 260px !important;
-                min-width: 140px;
-                margin: 18px auto 0 auto !important;
-                right: auto !important;
-                top: auto !important;
-                left: 0 !important;
-                transform: none !important;
-                display: flex;
-                justify-content: center;
+            /* About Section */
+            .about-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
                 align-items: center;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             }
-            .hero-image img {
-                width: 100% !important;
-                height: auto !important;
-                border-radius: 12px !important;
+
+            .about-text p {
+                margin-bottom: 1.5rem;
+                line-height: 1.7;
+            }
+
+            .about-tech {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .tech-pill {
+                background: rgba(100, 255, 218, 0.1);
+                border: 1px solid var(--accent);
+                color: var(--accent);
+                padding: 0.5rem 1.2rem;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                transition: all 0.3s;
+                cursor: default;
+            }
+
+            .tech-pill:hover {
+                transform: translateY(-3px);
+                background: rgba(100, 255, 218, 0.2);
+                box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+            }
+
+            .about-image {
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                border: 3px solid var(--accent);
+                position: relative;
+                transform: perspective(1000px) rotateY(-5deg);
+                transition: transform 0.5s;
+            }
+
+            .about-image:hover {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+
+            .about-image img {
+                width: 100%;
+                height: auto;
                 display: block;
             }
-            .hero-content {
+
+            /* Education & Experience */
+            .marvel-timeline {
+                position: relative;
+                padding: 3rem 0 2rem 0;
+                background: linear-gradient(120deg, #0a192f 80%, #9d4edd22 100%);
+                border-radius: 20px;
+                box-shadow: 0 0 40px #64ffda33, 0 0 0 4px #64ffda11;
+                margin-bottom: 4rem;
+                overflow: hidden;
+            }
+
+            .timeline-progress {
+                position: absolute;
+                left: 50px;
+                top: 60px;
+                bottom: 60px;
+                width: 8px;
+                background: rgba(100,255,218,0.08);
+                border-radius: 4px;
+                z-index: 0;
+            }
+
+            .timeline-bar {
+                width: 100%;
+                height: 0;
+                background: linear-gradient(180deg, #64ffda 0%, #9d4edd 100%);
+                border-radius: 4px;
+                box-shadow: 0 0 20px #64ffda99;
+                transition: height 2s cubic-bezier(.77,0,.18,1);
+            }
+
+            .timeline-missions {
+                position: relative;
+                z-index: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                margin-left: 120px;
+            }
+
+            .mission-card {
+                background: rgba(17,34,64,0.95);
+                border: 2px solid #64ffda;
+                border-radius: 18px;
+                box-shadow: 0 0 30px #64ffda22;
+                padding: 2rem 2.5rem 2rem 5rem;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.4s, box-shadow 0.4s;
+                cursor: pointer;
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+
+            .mission-card .mission-icon {
+                position: absolute;
+                left: -40px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: linear-gradient(135deg, #64ffda, #9d4edd);
+                color: #0a192f;
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2.2rem;
+                box-shadow: 0 0 20px #64ffda99;
+                border: 3px solid #fff3;
+                z-index: 2;
+                transition: box-shadow 0.3s;
+            }
+
+            .mission-card .mission-badge {
+                position: absolute;
+                top: 18px;
+                right: 30px;
+                background: linear-gradient(90deg, #FFD700, #64ffda);
+                color: #0a192f;
+                font-weight: bold;
+                padding: 0.4rem 1.2rem;
+                border-radius: 20px;
+                font-size: 1rem;
+                box-shadow: 0 0 10px #FFD70055;
+                letter-spacing: 1px;
+            }
+
+            .mission-card .mission-content h3 {
+                color: #FFD700;
+                margin-bottom: 0.3rem;
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            .mission-card .date {
+                color: #64ffda;
+                font-size: 1rem;
+                margin-bottom: 0.7rem;
+                display: block;
+            }
+
+            .mission-card .mission-content p {
+                color: #ccd6f6;
+                font-size: 1rem;
+                margin-bottom: 0;
+            }
+
+            .mission-card:hover, .mission-card:focus {
+                transform: translateY(-8px) scale(1.03);
+                box-shadow: 0 0 40px #FFD70099, 0 0 0 4px #FFD70033;
+                z-index: 10;
+            }
+
+            .mission-card.visible {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                transition: opacity 0.7s, transform 0.7s;
+            }
+
+            .secret-mission {
+                background: linear-gradient(120deg, #FFD700 60%, #9d4edd 100%);
+                color: #111 !important;
+                border: 2px solid #FFD700;
+                box-shadow: 0 0 40px #FFD70055;
+                position: relative;
+                overflow: visible;
+            }
+
+            .secret-mission .mission-content h3,
+            .secret-mission .mission-badge {
+                color: #9d4edd;
+                background: #fff;
+            }
+
+            .secret-mission .mission-icon {
+                background: linear-gradient(135deg, #FFD700, #9d4edd);
+                color: #fff;
+                box-shadow: 0 0 30px #FFD70099;
+            }
+
+            .claim-reward-btn {
+                animation: pulseGlow 1.2s infinite alternate;
+                transition: background 0.3s, color 0.3s;
+            }
+
+            .claim-reward-btn:hover {
+                background:linear-gradient(90deg,#64ffda,#FFD700);
+                color:#9d4edd;
+            }
+
+            @keyframes pulseGlow {
+                0% { box-shadow: 0 0 10px #FFD70055; }
+                100% { box-shadow: 0 0 30px #FFD700, 0 0 10px #64ffda; }
+            }
+
+            .confetti-piece {
+                position: absolute;
+                width: 10px;
+                height: 18px;
+                border-radius: 3px;
+                opacity: 0.8;
+                pointer-events: none;
+                animation: confetti-fall 1.5s linear forwards;
+            }
+
+            @keyframes confetti-fall {
+                0% { transform: translateY(-40px) rotate(0deg); }
+                100% { transform: translateY(300px) rotate(360deg); opacity:0; }
+            }
+
+            @media (max-width: 700px) {
+                .timeline-missions { margin-left: 0; }
+                .timeline-progress { left: 10px; }
+                .mission-card { padding: 2rem 1rem 2rem 3.5rem; }
+                .mission-card .mission-icon { left: -30px; width: 50px; height: 50px; font-size: 1.3rem; }
+            }
+
+            /* Skills Section */
+            .skills-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+
+            .skill-category {
+                background: var(--secondary);
+                padding: 2rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(100, 255, 218, 0.1);
+                transition: all 0.5s;
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            .skill-category.visible {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .skill-category h3 {
+                color: var(--accent);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .skill-item {
+                margin-bottom: 1.5rem;
+            }
+
+            .skill-info {
+                display: flex;
+                justify-content: space-between;
                 margin-bottom: 0.5rem;
             }
-        }
 
-        /* Make waveform always fit container */
-        .edith-audio-waveform {
-            height: 36px;
-            display: none;
-            background: transparent;
-            margin: 0 auto 4px auto;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-    </style>
-</head>
-<body>
-<div id="particles-js"></div>
+            .skill-bar {
+                height: 10px;
+                background: rgba(136, 146, 176, 0.2);
+                border-radius: 5px;
+                overflow: hidden;
+            }
 
-<!-- Header -->
-<header>
-    <a href="#" class="logo"><i class="fas fa-microchip"></i>Vishal</a>
-    <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+            .skill-progress {
+                height: 100%;
+                border-radius: 5px;
+                width: 0;
+                transition: width 1.5s ease-out;
+            }
 
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Hi, I'm <span>Vishal Meyyappan R.</span></h1>
-        <h2>Electronics & Communication Engineering Student</h2>
-        <p>I'm a passionate tech enthusiast specializing in embedded systems, electronics, and software integration. Currently exploring IoT, automation, and AI to create impactful tech solutions.</p>
-        <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary">Get in Touch</a>
-            <a href="#achievements" class="btn btn-secondary">View Achievements</a>
+            /* Certificates & Achievements */
+            .achievements-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+
+            .achievement-card {
+                background: var(--secondary);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                transition: all 0.3s;
+                border: 1px solid rgba(100, 255, 218, 0.1);
+                transform: translateY(20px);
+                opacity: 0;
+                position: relative;
+                perspective: 1000px;
+            }
+
+            .achievement-card.visible {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .achievement-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(100, 255, 218, 0.2);
+                z-index: 10;
+            }
+
+            .achievement-icon {
+                height: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(157, 78, 221, 0.1));
+                font-size: 3rem;
+                color: var(--accent);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .achievement-icon::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+                transform: rotate(45deg);
+                transition: all 0.5s;
+            }
+
+            .achievement-card:hover .achievement-icon::before {
+                top: -100%;
+                left: -100%;
+            }
+
+            .achievement-content {
+                padding: 1.5rem;
+            }
+
+            .achievement-content h3 {
+                margin-bottom: 0.5rem;
+                transition: all 0.3s;
+            }
+
+            .achievement-card:hover .achievement-content h3 {
+                color: var(--accent);
+            }
+
+            .achievement-content .date {
+                color: var(--highlight);
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                display: block;
+            }
+
+            /* Contact Section */
+            .contact-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .contact-item {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgba(100, 255, 218, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                color: var(--accent);
+                transition: all 0.3s;
+            }
+
+            .contact-item:hover .contact-icon {
+                transform: scale(1.1);
+                background: var(--accent);
+                color: var(--primary);
+            }
+
+            .contact-text h3 {
+                margin-bottom: 0.3rem;
+            }
+
+            .contact-text a {
+                color: var(--accent);
+                text-decoration: none;
+                transition: opacity 0.3s;
+                position: relative;
+            }
+
+            .contact-text a::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: var(--accent);
+                transition: width 0.3s;
+            }
+
+            .contact-text a:hover::after {
+                width: 100%;
+            }
+
+            .social-links {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(136, 146, 176, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                color: var(--accent);
+                transition: all 0.3s;
+                text-decoration: none;
+            }
+
+            .social-icon:hover {
+                background: var(--accent);
+                color: var(--primary);
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+            }
+
+            .contact-form {
+                background: var(--secondary);
+                padding: 2rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group input, .form-group textarea {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                border: 1px solid rgba(136, 146, 176, 0.3);
+                background: rgba(10, 25, 47, 0.5);
+                border-radius: 5px;
+                color: var(--text);
+                font-size: 1rem;
+                transition: all 0.3s;
+            }
+
+            .form-group input:focus, .form-group textarea:focus {
+                outline: none;
+                border-color: var(--accent);
+                box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+            }
+
+            .form-group textarea {
+                min-height: 150px;
+                resize: vertical;
+            }
+
+            /* Footer */
+            footer {
+                background: var(--secondary);
+                padding: 2rem 10%;
+                text-align: center;
+                border-top: 1px solid rgba(100, 255, 218, 0.1);
+                position: relative;
+                z-index: 10;
+            }
+
+            .footer-text {
+                color: var(--highlight);
+                font-size: 0.9rem;
+            }
+
+            /* Animations */
+            @keyframes float {
+                0% {
+                    transform: translateY(-50%) translateX(0);
+                }
+                50% {
+                    transform: translateY(-50%) translateX(20px);
+                }
+                100% {
+                    transform: translateY(-50%) translateX(0);
+                }
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.1);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes typewriter {
+                from { width: 0 }
+                to { width: 100% }
+            }
+
+            @keyframes blink {
+                from, to { border-color: transparent }
+                50% { border-color: var(--accent) }
+            }
+
+            /* Responsive Design */
+            @media (max-width: 992px) {
+                .hero {
+                    flex-direction: column;
+                    text-align: center;
+                    padding-top: 8rem;
+                }
+
+                .hero-content {
+                    margin-bottom: 3rem;
+                }
+
+                .hero-image {
+                    position: relative;
+                    width: 80%;
+                    right: auto;
+                    top: auto;
+                    transform: none;
+                    margin: 0 auto;
+                }
+
+                .about-content,
+                .contact-container {
+                    grid-template-columns: 1fr;
+                }
+
+                .timeline::before {
+                    left: 20px;
+                }
+
+                .timeline-item {
+                    width: 100%;
+                    padding-left: 50px;
+                    padding-right: 25px;
+                }
+
+                .timeline-item:nth-child(even) {
+                    left: 0;
+                }
+
+                .timeline-item::before {
+                    left: 10px !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .stats {
+                    flex-direction: column;
+                    gap: 2rem;
+                }
+
+                .hero h1 {
+                    font-size: 2.8rem;
+                }
+
+                .hero h2 {
+                    font-size: 1.5rem;
+                }
+
+                .section-title h2 {
+                    font-size: 2rem;
+                }
+            }
+
+            /* EDITH AI Assistant Styles */
+            .edith-assistant {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                z-index: 1000;
+            }
+
+            .edith-chat-icon {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--accent), var(--purple));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 5px 25px rgba(100, 255, 218, 0.4);
+                animation: pulse 2s infinite;
+                position: relative;
+                overflow: hidden;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .edith-chat-icon::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transform: rotate(45deg);
+                transition: all 0.5s;
+            }
+
+            .edith-chat-icon:hover::before {
+                top: -100%;
+                left: -100%;
+            }
+
+            .edith-chat-icon i {
+                font-size: 2rem;
+                color: var(--primary);
+            }
+
+            .edith-chat-container {
+                position: fixed;
+                bottom: 120px;
+                right: 30px;
+                width: 350px;
+                height: 450px;
+                background: rgba(10, 25, 47, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(100, 255, 218, 0.3);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                z-index: 1000;
+                transform: scale(0);
+                transform-origin: bottom right;
+                transition: transform 0.3s ease;
+            }
+
+            .edith-chat-container.open {
+                transform: scale(1);
+            }
+
+            .edith-chat-header {
+                padding: 1.2rem;
+                background: linear-gradient(90deg, rgba(10, 25, 47, 0.9), rgba(157, 78, 221, 0.2));
+                border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .edith-title {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .edith-logo {
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(135deg, var(--accent), var(--purple));
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                color: var(--primary);
+                box-shadow: 0 0 15px var(--accent);
+            }
+
+            .edith-logo.speaking {
+                animation: logoGlow 1.5s infinite alternate;
+            }
+
+            .edith-title-text {
+                font-size: 1.3rem;
+                font-weight: 700;
+                background: linear-gradient(90deg, var(--edith-gold), var(--accent));
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .edith-close {
+                background: rgba(239, 71, 111, 0.2);
+                border: 1px solid var(--danger);
+                color: var(--danger);
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-size: 1rem;
+            }
+
+            .edith-close:hover {
+                background: rgba(239, 71, 111, 0.4);
+                transform: rotate(90deg);
+                box-shadow: 0 0 15px var(--danger);
+            }
+
+            .edith-chat-messages {
+                flex: 1;
+                padding: 1.2rem;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .edith-message {
+                max-width: 85%;
+                padding: 12px 16px;
+                border-radius: 15px;
+                position: relative;
+                animation: fadeIn 0.3s ease-out;
+                line-height: 1.5;
+                font-size: 0.95rem;
+            }
+
+            .edith-response {
+                background: rgba(157, 78, 221, 0.15);
+                border: 1px solid rgba(157, 78, 221, 0.3);
+                align-self: flex-start;
+                border-bottom-left-radius: 5px;
+            }
+
+            .user-message {
+                background: rgba(100, 255, 218, 0.1);
+                border: 1px solid rgba(100, 255, 218, 0.3);
+                align-self: flex-end;
+                border-bottom-right-radius: 5px;
+            }
+
+            .edith-typing {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                color: var(--highlight);
+                font-style: italic;
+                font-size: 0.9rem;
+            }
+
+            .edith-typing span {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background: var(--accent);
+                border-radius: 50%;
+                animation: typing 1.4s infinite ease-in-out;
+            }
+
+            .edith-typing span:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+
+            .edith-typing span:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+
+            .edith-input-container {
+                padding: 1rem;
+                background: rgba(10, 25, 47, 0.7);
+                border-top: 1px solid rgba(100, 255, 218, 0.2);
+                display: flex;
+                gap: 10px;
+            }
+
+            .edith-input {
+                flex: 1;
+                padding: 12px 16px;
+                background: rgba(10, 25, 47, 0.6);
+                border: 1px solid rgba(100, 255, 218, 0.3);
+                border-radius: 50px;
+                color: var(--text);
+                font-size: 0.95rem;
+                transition: all 0.3s;
+            }
+
+            .edith-input:focus {
+                outline: none;
+                border-color: var(--accent);
+                box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+            }
+
+            .edith-send {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--accent), var(--purple));
+                border: none;
+                color: var(--primary);
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .edith-send:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 15px var(--accent);
+            }
+
+            /* TTS Controls */
+            .tts-controls {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0 1.2rem;
+                background: rgba(10, 25, 47, 0.7);
+                border-top: 1px solid rgba(100, 255, 218, 0.2);
+                padding-bottom: 0.5rem;
+            }
+
+            .tts-toggle {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.9rem;
+                color: var(--highlight);
+            }
+
+            .tts-toggle input {
+                position: relative;
+                width: 40px;
+                height: 20px;
+                -webkit-appearance: none;
+                background: rgba(136, 146, 176, 0.2);
+                border-radius: 20px;
+                outline: none;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .tts-toggle input:checked {
+                background: var(--accent);
+            }
+
+            .tts-toggle input::before {
+                content: '';
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                top: 2px;
+                left: 2px;
+                background: var(--text);
+                transform: scale(1);
+                transition: all 0.3s;
+            }
+
+            .tts-toggle input:checked::before {
+                left: 22px;
+                background: var(--primary);
+            }
+
+            .voice-indicator {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                margin-left: auto;
+                display: none; /* Hidden by default */
+            }
+
+            .voice-indicator span {
+                width: 4px;
+                height: 20px;
+                background: var(--accent);
+                border-radius: 2px;
+                transform-origin: bottom;
+                animation: voicePulse 1.2s infinite ease-in-out;
+            }
+
+            .voice-indicator span:nth-child(1) { animation-delay: 0.1s; }
+            .voice-indicator span:nth-child(2) { animation-delay: 0.2s; height: 15px; }
+            .voice-indicator span:nth-child(3) { animation-delay: 0.3s; height: 10px; }
+            .voice-indicator span:nth-child(4) { animation-delay: 0.4s; height: 15px; }
+            .voice-indicator span:nth-child(5) { animation-delay: 0.5s; }
+
+            /* Fast Mode Toggle */
+            .fast-mode-toggle {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.9rem;
+                color: var(--highlight);
+                margin-left: 15px;
+            }
+
+            .fast-mode-toggle input {
+                position: relative;
+                width: 40px;
+                height: 20px;
+                -webkit-appearance: none;
+                background: rgba(136, 146, 176, 0.2);
+                border-radius: 20px;
+                outline: none;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .fast-mode-toggle input:checked {
+                background: var(--purple);
+            }
+
+            .fast-mode-toggle input::before {
+                content: '';
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                top: 2px;
+                left: 2px;
+                background: var(--text);
+                transform: scale(1);
+                transition: all 0.3s;
+            }
+
+            .fast-mode-toggle input:checked::before {
+                left: 22px;
+                background: var(--primary);
+            }
+
+            /* New Animations */
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes typing {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+
+            @keyframes voicePulse {
+                0%, 100% { transform: scaleY(1); }
+                50% { transform: scaleY(0.3); }
+            }
+
+            @keyframes logoGlow {
+                0% {
+                    box-shadow: 0 0 5px var(--accent);
+                }
+                100% {
+                    box-shadow: 0 0 20px var(--accent), 0 0 30px var(--purple);
+                }
+            }
+
+            /* Responsive for EDITH */
+            @media (max-width: 480px) {
+                .edith-chat-container {
+                    width: 98vw;
+                    min-width: unset;
+                    max-width: 100vw;
+                    height: 60vh;
+                    right: 1vw;
+                    bottom: 80px;
+                    border-radius: 12px;
+                    padding: 0;
+                }
+                .edith-chat-header {
+                    padding: 0.7rem 0.7rem 0.7rem 1rem;
+                }
+                .edith-title-text {
+                    font-size: 1.05rem;
+                }
+                .edith-chat-messages {
+                    padding: 0.7rem;
+                    font-size: 0.92rem;
+                }
+                .edith-input-container {
+                    padding: 0.7rem;
+                    gap: 6px;
+                }
+                .edith-input {
+                    font-size: 0.92rem;
+                    padding: 10px 12px;
+                }
+                .edith-send {
+                    width: 38px;
+                    height: 38px;
+                    font-size: 1rem;
+                }
+                .tts-controls {
+                    padding: 0 0.7rem 0.3rem 0.7rem;
+                    flex-wrap: wrap;
+                    font-size: 0.85rem;
+                }
+                .edith-audio-waveform {
+                    height: 24px !important;
+                    min-height: 20px;
+                    max-height: 28px;
+                    margin-bottom: 2px;
+                }
+                .hero-image {
+                    position: relative !important;
+                    width: 70vw !important;
+                    max-width: 260px !important;
+                    min-width: 140px;
+                    margin: 18px auto 0 auto !important;
+                    right: auto !important;
+                    top: auto !important;
+                    left: 0 !important;
+                    transform: none !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+                }
+                .hero-image img {
+                    width: 100% !important;
+                    height: auto !important;
+                    border-radius: 12px !important;
+                    display: block;
+                }
+                .hero-content {
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            /* Make waveform always fit container */
+            .edith-audio-waveform {
+                height: 36px;
+                display: none;
+                background: transparent;
+                margin: 0 auto 4px auto;
+                border-radius: 8px;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo"><i class="fas fa-microchip"></i>Vishal</a>
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Vishal Meyyappan R.</span></h1>
+            <h2>Electronics & Communication Engineering Student</h2>
+            <p>I'm a passionate tech enthusiast specializing in embedded systems, electronics, and software integration. Currently exploring IoT, automation, and AI to create impactful tech solutions.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#achievements" class="btn btn-secondary">View Achievements</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="data/vishalpic1.jpg" alt="Vishal Meyyappan">
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-number">1100+</div>
+            <div class="stat-label">Skill Rack problem count</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">8.35</div>
+            <div class="stat-label">Current CGPA</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">160+</div>
+            <div class="stat-label">LeetCode Problems</div>
         </div>
     </div>
-    <div class="hero-image">
-        <img src="data/vishalpic1.jpg" alt="Vishal Meyyappan">
-    </div>
-</section>
 
-<!-- Stats -->
-<div class="stats">
-    <div class="stat-item">
-        <div class="stat-number">1100+</div>
-        <div class="stat-label">Skill Rack problem count</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number">8.35</div>
-        <div class="stat-label">Current CGPA</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number">160+</div>
-        <div class="stat-label">LeetCode Problems</div>
-    </div>
-</div>
-
-<!-- About Section -->
-<section id="about">
-    <div class="section-title">
-        <h2>About Me</h2>
-    </div>
-    <div class="about-content">
-        <div class="about-text">
-            <p>I'm a second-year Electronics and Communication Engineering student at Chennai Institute of Technology, passionate about embedded systems, electronics, and software integration.</p>
-            <p>I recently completed an internship at IMD Chennai, where I worked on building a working model of Doppler weather radar from scratch using ESP32, developing a GUI, and working with motor precision.</p>
-            <p>I'm actively exploring IoT, automation, AI and real-world industrial applications. I'm always eager to learn, build, and contribute to impactful tech solutions.</p>
-            <div class="about-tech">
-                <div class="tech-pill">Embedded Systems</div>
-                <div class="tech-pill">IoT</div>
-                <div class="tech-pill">Arduino</div>
-                <div class="tech-pill">ESP32</div>
-                <div class="tech-pill">C/C++</div>
-                <div class="tech-pill">Python</div>
-                <div class="tech-pill">AI</div>
-                <div class="tech-pill">Automation</div>
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-title">
+            <h2>About Me</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm a second-year Electronics and Communication Engineering student at Chennai Institute of Technology, passionate about embedded systems, electronics, and software integration.</p>
+                <p>I recently completed an internship at IMD Chennai, where I worked on building a working model of Doppler weather radar from scratch using ESP32, developing a GUI, and working with motor precision.</p>
+                <p>I'm actively exploring IoT, automation, AI and real-world industrial applications. I'm always eager to learn, build, and contribute to impactful tech solutions.</p>
+                <div class="about-tech">
+                    <div class="tech-pill">Embedded Systems</div>
+                    <div class="tech-pill">IoT</div>
+                    <div class="tech-pill">Arduino</div>
+                    <div class="tech-pill">ESP32</div>
+                    <div class="tech-pill">C/C++</div>
+                    <div class="tech-pill">Python</div>
+                    <div class="tech-pill">AI</div>
+                    <div class="tech-pill">Automation</div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="data/vishalpic2.jpg" alt="About Vishal">
             </div>
         </div>
-        <div class="about-image">
-            <img src="data/vishalpic2.jpg" alt="About Vishal">
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Education & Experience -->
-<section id="education">
-    <div class="section-title">    
-        <h2><i class="fas fa-atom"></i> Education & Experience</h2>
-    </div>
-    <div class="marvel-timeline">
-        <div class="timeline-progress">
-            <div class="timeline-bar"></div>
+    <!-- Education & Experience -->
+    <section id="education">
+        <div class="section-title">    
+            <h2><i class="fas fa-atom"></i> Education & Experience</h2>
         </div>
-        <div class="timeline-missions">
-            <div class="mission-card" data-mission="3">
-                <div class="mission-icon"><i class="fas fa-satellite-dish"></i></div>
-                <div class="mission-content">
-                    <h3>IMD Chennai - Internship</h3>
-                    <span class="date">May 2025 - June 2025</span>
-                    <p>Built Doppler weather radar using ESP32<br>
-                    Developed GUI, worked with motor precision</p>
-                </div>
-                <div class="mission-badge">Mission 1</div>
+        <div class="marvel-timeline">
+            <div class="timeline-progress">
+                <div class="timeline-bar"></div>
             </div>
-            <div class="mission-card" data-mission="2">
-                <div class="mission-icon"><i class="fas fa-graduation-cap"></i></div>
-                <div class="mission-content">
-                    <h3>Chennai Institute of Technology</h3>
-                    <span class="date">2024 - 2028</span>
-                    <p>B.E. Electronics and Communication Engineering<br>
-                    Specialization: Advanced Communication Technology<br>
-                    GPA: 8.35</p>
+            <div class="timeline-missions">
+                <div class="mission-card" data-mission="3">
+                    <div class="mission-icon"><i class="fas fa-satellite-dish"></i></div>
+                    <div class="mission-content">
+                        <h3>IMD Chennai - Internship</h3>
+                        <span class="date">May 2025 - June 2025</span>
+                        <p>Built Doppler weather radar using ESP32<br>
+                        Developed GUI, worked with motor precision</p>
+                    </div>
+                    <div class="mission-badge">Mission 1</div>
                 </div>
-                <div class="mission-badge">Mission 2</div>
-            </div>
-            <div class="mission-card" data-mission="1">
-                <div class="mission-icon"><i class="fas fa-school"></i></div>
-                <div class="mission-content">
-                    <h3>TI School</h3>
-                    <span class="date">2022 - 2024</span>
-                    <p>Higher Secondary Education<br>
-                    Stream: Mathematics & Computer Science</p>
+                <div class="mission-card" data-mission="2">
+                    <div class="mission-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="mission-content">
+                        <h3>Chennai Institute of Technology</h3>
+                        <span class="date">2024 - 2028</span>
+                        <p>B.E. Electronics and Communication Engineering<br>
+                        Specialization: Advanced Communication Technology<br>
+                        GPA: 8.35</p>
+                    </div>
+                    <div class="mission-badge">Mission 2</div>
                 </div>
-                <div class="mission-badge">Mission 3</div>
-            </div>
-            <div class="mission-card secret-mission" data-mission="4">
-                <div class="mission-icon"><i class="fas fa-robot"></i></div>
-                <div class="mission-content" style="color:#111;">
-                    <h3 style="color:#111;">EDITH's Secret Unlocked!</h3>
-                    <span class="date" style="color:#222;">2025</span>
-                    <p style="color:#222;">Congratulations! You've completed all missions.<br>
-                    <strong style="color:#111;">EDITH:</strong> <span style="color:#222;">"The journey is just beginning, hero."</span></p>
-                    <button class="claim-reward-btn" style="margin-top:1rem; background:linear-gradient(90deg,#FFD700,#64ffda);color:#111;font-weight:bold;padding:0.6rem 1.5rem;border:none;border-radius:20px;box-shadow:0 0 10px #FFD70055;cursor:pointer;font-size:1.1rem;">Claim Reward</button>
+                <div class="mission-card" data-mission="1">
+                    <div class="mission-icon"><i class="fas fa-school"></i></div>
+                    <div class="mission-content">
+                        <h3>TI School</h3>
+                        <span class="date">2022 - 2024</span>
+                        <p>Higher Secondary Education<br>
+                        Stream: Mathematics & Computer Science</p>
+                    </div>
+                    <div class="mission-badge">Mission 3</div>
                 </div>
-                <div class="mission-badge">Secret</div>
-                <div class="confetti" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Skills Section -->
-<section id="skills">
-    <div class="section-title">
-        <h2>Technical Skills</h2>
-    </div>
-    <div class="skills-container">
-        <div class="skill-category">
-            <h3><i class="fas fa-microchip"></i> Hardware & Embedded</h3>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>ESP32</span>
-                    <span>90%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--success);" data-width="90%"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Arduino</span>
-                    <span>85%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--success);" data-width="85%"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Embedded Systems</span>
-                    <span>80%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--success);" data-width="80%"></div>
+                <div class="mission-card secret-mission" data-mission="4">
+                    <div class="mission-icon"><i class="fas fa-robot"></i></div>
+                    <div class="mission-content" style="color:#111;">
+                        <h3 style="color:#111;">EDITH's Secret Unlocked!</h3>
+                        <span class="date" style="color:#222;">2025</span>
+                        <p style="color:#222;">Congratulations! You've completed all missions.<br>
+                        <strong style="color:#111;">EDITH:</strong> <span style="color:#222;">"The journey is just beginning, hero."</span></p>
+                        <button class="claim-reward-btn" style="margin-top:1rem; background:linear-gradient(90deg,#FFD700,#64ffda);color:#111;font-weight:bold;padding:0.6rem 1.5rem;border:none;border-radius:20px;box-shadow:0 0 10px #FFD70055;cursor:pointer;font-size:1.1rem;">Claim Reward</button>
+                    </div>
+                    <div class="mission-badge">Secret</div>
+                    <div class="confetti" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;"></div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="skill-category">
-            <h3><i class="fas fa-code"></i> Programming Languages</h3>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>C/C++</span>
-                    <span>95%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--accent);" data-width="95%"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Python</span>
-                    <span>90%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--accent);" data-width="90%"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Java</span>
-                    <span>75%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--accent);" data-width="75%"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>SQL</span>
-                    <span>70%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--accent);" data-width="70%"></div>
-                </div>
-            </div>
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-title">
+            <h2>Technical Skills</h2>
         </div>
-
-        <div class="skill-category">
-            <h3><i class="fas fa-laptop-code"></i> Development</h3>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>GUI Development</span>
-                    <span>80%</span>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3><i class="fas fa-microchip"></i> Hardware & Embedded</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>ESP32</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--success);" data-width="90%"></div>
+                    </div>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--warning);" data-width="80%"></div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Arduino</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--success);" data-width="85%"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Web Development</span>
-                    <span>70%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--warning);" data-width="70%"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="skill-category">
-            <h3><i class="fas fa-users"></i> Soft Skills</h3>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Leadership</span>
-                    <span>90%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--danger);" data-width="90%"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info">
-                    <span>Team Management</span>
-                    <span>85%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="background: var(--danger);" data-width="85%"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Certificates & Achievements -->
-<section id="achievements">
-    <div class="section-title">
-        <h2>Achievements & Certificates</h2>
-    </div>
-    <div class="achievements-grid">
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fab fa-python"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>PCAP: Programming Essentials in Python</h3>
-                <span class="date">Cisco Networking Academy & OpenEDG Python Institute</span>
-                <p>Certification in Python programming essentials.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-c"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>CLA: Programming Essentials in C</h3>
-                <span class="date">Cisco Networking Academy</span>
-                <p>Certification in C programming essentials.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-robot"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>CODEY Robotics Course</h3>
-                <span class="date">SP Robotics Works</span>
-                <p>Completed robotics course with hands-on experience.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-microchip"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>Learning Arduino: Foundation</h3>
-                <span class="date">LinkedIn Learning</span>
-                <p>Fundamental course on Arduino development.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-brain"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>Supervised Machine Learning</h3>
-                <span class="date">Stanford University & DeepLearning.AI</span>
-                <p>Regression and Classification techniques certification.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-project-diagram"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>Product Management Professional</h3>
-                <span class="date">Aha! & NASBA</span>
-                <p>Project Management certification from LinkedIn.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-camera"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>Photography Club President</h3>
-                <span class="date">TI School (2023-2024)</span>
-                <p>Managed 150+ members and organized intra-school competitions.</p>
-            </div>
-        </div>
-
-        <div class="achievement-card">
-            <div class="achievement-icon">
-                <i class="fas fa-code"></i>
-            </div>
-            <div class="achievement-content">
-                <h3>1100+ Coding Problems Solved</h3>
-                <span class="date">SkillRack</span>
-                <p>Consistent problem solving on coding platforms.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact">
-    <div class="section-title">
-        <h2>Contact Me</h2>
-    </div>
-    <div class="contact-container">
-        <div class="contact-info">
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <div class="contact-text">
-                    <h3>Phone</h3>
-                    <a href="tel:+91637970766">+91 637970766</a>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Embedded Systems</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--success);" data-width="80%"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>C/C++</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--accent);" data-width="95%"></div>
+                    </div>
                 </div>
-                <div class="contact-text">
-                    <h3>Email</h3>
-                    <a href="mailto:vishalmeyyappan@gmail.com">vishalmeyyappan@gmail.com</a>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Python</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--accent);" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Java</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--accent);" data-width="75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>SQL</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--accent);" data-width="70%"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
+            <div class="skill-category">
+                <h3><i class="fas fa-laptop-code"></i> Development</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>GUI Development</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--warning);" data-width="80%"></div>
+                    </div>
                 </div>
-                <div class="contact-text">
-                    <h3>Location</h3>
-                    <p>Ambattur, Chennai</p>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Web Development</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--warning);" data-width="70%"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-share-alt"></i>
+            <div class="skill-category">
+                <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Leadership</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--danger);" data-width="90%"></div>
+                    </div>
                 </div>
-                <div class="contact-text">
-                    <h3>Connect With Me</h3>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/vishalmeyyappanr/" class="social-icon" target="_blank">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://github.com/vishal-r07" class="social-icon" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="http://www.skillrack.com/profile/491713/77238afa904f06b353dc3387954091eb822296b7" class="social-icon" target="_blank">
-                            <i class="fas fa-laptop-code"></i>
-                        </a>
-                        <a href="https://leetcode.com/u/vishalmeyyappan/" class="social-icon" target="_blank">
-                            <i class="fas fa-code"></i>
-                        </a>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Team Management</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="background: var(--danger);" data-width="85%"></div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="contact-form">
-            <form action="https://formspree.io/f/movwleqk" method="POST">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject" placeholder="Subject">
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+    <!-- Certificates & Achievements -->
+    <section id="achievements">
+        <div class="section-title">
+            <h2>Achievements & Certificates</h2>
         </div>
-    </div>
-</section>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fab fa-python"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>PCAP: Programming Essentials in Python</h3>
+                    <span class="date">Cisco Networking Academy & OpenEDG Python Institute</span>
+                    <p>Certification in Python programming essentials.</p>
+                </div>
+            </div>
 
-<!-- Footer -->
-<footer>
-    <p class="footer-text">© 2025 Vishal Meyyappan R. | All Rights Reserved</p>
-</footer>
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-c"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>CLA: Programming Essentials in C</h3>
+                    <span class="date">Cisco Networking Academy</span>
+                    <p>Certification in C programming essentials.</p>
+                </div>
+            </div>
 
-<!-- EDITH AI Assistant -->
-<div class="edith-assistant">
-    <div class="edith-chat-icon" id="edithChatIcon">
-        <i class="fas fa-robot"></i>
-    </div>
-    <div class="edith-chat-container" id="edithChatContainer">
-        <div class="edith-chat-header">
-            <div class="edith-title">
-                <div class="edith-logo">
+            <div class="achievement-card">
+                <div class="achievement-icon">
                     <i class="fas fa-robot"></i>
                 </div>
-                <div class="edith-title-text">EDITH</div>
+                <div class="achievement-content">
+                    <h3>CODEY Robotics Course</h3>
+                    <span class="date">SP Robotics Works</span>
+                    <p>Completed robotics course with hands-on experience.</p>
+                </div>
             </div>
-            <div class="edith-close" id="edithClose">
-                <i class="fas fa-times"></i>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Learning Arduino: Foundation</h3>
+                    <span class="date">LinkedIn Learning</span>
+                    <p>Fundamental course on Arduino development.</p>
+                </div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Supervised Machine Learning</h3>
+                    <span class="date">Stanford University & DeepLearning.AI</span>
+                    <p>Regression and Classification techniques certification.</p>
+                </div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Product Management Professional</h3>
+                    <span class="date">Aha! & NASBA</span>
+                    <p>Project Management certification from LinkedIn.</p>
+                </div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Photography Club President</h3>
+                    <span class="date">TI School (2023-2024)</span>
+                    <p>Managed 150+ members and organized intra-school competitions.</p>
+                </div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>1100+ Coding Problems Solved</h3>
+                    <span class="date">SkillRack</span>
+                    <p>Consistent problem solving on coding platforms.</p>
+                </div>
             </div>
         </div>
-        <div class="edith-chat-messages" id="edithChatMessages">
-            <div class="edith-message edith-response">
-                <strong>EDITH:</strong> Hello, I'm your personal AI assistant. How can I help you explore Vishal's portfolio today?
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact Me</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Phone</h3>
+                        <a href="tel:+91637970766">+91 637970766</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <a href="mailto:vishalmeyyappan@gmail.com">vishalmeyyappan@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Location</h3>
+                        <p>Ambattur, Chennai</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Connect With Me</h3>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/vishalmeyyappanr/" class="social-icon" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/vishal-r07" class="social-icon" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="http://www.skillrack.com/profile/491713/77238afa904f06b353dc3387954091eb822296b7" class="social-icon" target="_blank">
+                                <i class="fas fa-laptop-code"></i>
+                            </a>
+                            <a href="https://leetcode.com/u/vishalmeyyappan/" class="social-icon" target="_blank">
+                                <i class="fas fa-code"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="edith-message edith-response">
-                Try asking:
-                <ul>
-                    <li>"What are your skills?"</li>
-                    <li>"Tell me about your education"</li>
-                    <li>"Show achievements"</li>
-                    <li>"Contact Vishal"</li>
-                </ul>
+
+            <div class="contact-form">
+                <form action="https://formspree.io/f/movwleqk" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
             </div>
         </div>
-        <div class="edith-audio-waveform" id="edithAudioWaveform" style="display:none;width:100%;height:36px;background:transparent;"></div>
-        <div class="tts-controls">
-            <div class="tts-toggle">
-                <label for="tts-toggle">Voice Assistant:</label>
-                <input type="checkbox" id="tts-toggle" checked>
-            </div>
-            <div class="fast-mode-toggle">
-                <label for="fast-mode">Fast Mode:</label>
-                <input type="checkbox" id="fast-mode">
-            </div>
-            <div class="voice-indicator" id="voiceIndicator">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2025 Vishal Meyyappan R. | All Rights Reserved</p>
+    </footer>
+
+    <!-- EDITH AI Assistant -->
+    <div class="edith-assistant">
+        <div class="edith-chat-icon" id="edithChatIcon">
+            <i class="fas fa-robot"></i>
         </div>
-        <div class="edith-input-container">
-            <input type="text" class="edith-input" id="edithInput" placeholder="Type your message here...">
-            <button class="edith-send" id="edithSend">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+        <div class="edith-chat-container" id="edithChatContainer">
+            <div class="edith-chat-header">
+                <div class="edith-title">
+                    <div class="edith-logo">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="edith-title-text">EDITH</div>
+                </div>
+                <div class="edith-close" id="edithClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="edith-chat-messages" id="edithChatMessages">
+                <div class="edith-message edith-response">
+                    <strong>EDITH:</strong> Hello, I'm your personal AI assistant. How can I help you explore Vishal's portfolio today?
+                </div>
+                <div class="edith-message edith-response">
+                    Try asking:
+                    <ul>
+                        <li>"What are your skills?"</li>
+                        <li>"Tell me about your education"</li>
+                        <li>"Show achievements"</li>
+                        <li>"Contact Vishal"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tts-controls">
+                <div class="tts-toggle">
+                    <label for="tts-toggle">Voice Assistant:</label>
+                    <input type="checkbox" id="tts-toggle" checked>
+                </div>
+                <div class="fast-mode-toggle">
+                    <label for="fast-mode">Fast Mode:</label>
+                    <input type="checkbox" id="fast-mode">
+                </div>
+                <div class="voice-indicator" id="voiceIndicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="edith-input-container">
+                <input type="text" class="edith-input" id="edithInput" placeholder="Type your message here...">
+                <button class="edith-send" id="edithSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Theme Audio -->
-<audio id="edith-theme" preload="auto">
-    <source src="data/EDITHbgm.mp3" type="audio/mpeg">
-</audio>
+    <!-- Theme Audio -->
+    <audio id="edith-theme" preload="auto">
+        <source src="data/EDITHbgm.mp3" type="audio/mpeg">
+    </audio>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    // Initialize particle background
-    particlesJS('particles-js', {
-        particles: {
-            number: {
-                value: 80,
-                density: {
-                    enable: true,
-                    value_area: 800
-                }
-            },
-            color: {
-                value: "#64ffda"
-            },
-            shape: {
-                type: "circle",
-                stroke: {
-                    width: 0,
-                    color: "#000000"
-                }
-            },
-            opacity: {
-                value: 0.5,
-                random: true,
-                anim: {
-                    enable: true,
-                    speed: 1,
-                    opacity_min: 0.1,
-                    sync: false
-                }
-            },
-            size: {
-                value: 3,
-                random: true,
-                anim: {
-                    enable: true,
-                    speed: 2,
-                    size_min: 0.1,
-                    sync: false
-                }
-            },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: "#64ffda",
-                opacity: 0.4,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 2,
-                direction: "none",
-                random: true,
-                straight: false,
-                out_mode: "out",
-                bounce: false,
-                attract: {
-                    enable: false,
-                    rotateX: 600,
-                    rotateY: 1200
-                }
-            }
-        },
-        interactivity: {
-            detect_on: "canvas",
-            events: {
-                onhover: {
-                    enable: true,
-                    mode: "grab"
-                },
-                onclick: {
-                    enable: true,
-                    mode: "push"
-                },
-                resize: true
-            },
-            modes: {
-                grab: {
-                    distance: 140,
-                    line_linked: {
-                        opacity: 1
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particle background
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
                     }
                 },
-                bubble: {
-                    distance: 400,
-                    size: 40,
-                    duration: 2,
-                    opacity: 8,
-                    speed: 3
+                color: {
+                    value: "#64ffda"
                 },
-                repulse: {
-                    distance: 200,
-                    duration: 0.4
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
                 },
-                push: {
-                    particles_nb: 4
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
                 },
-                remove: {
-                    particles_nb: 2
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#64ffda",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
                 }
-            }
-        },
-        retina_detect: true
-    });
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-    });
 
-    // Animation on scroll
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
 
-                // If it's a progress bar, animate it
-                if (entry.target.classList.contains('skill-progress')) {
-                    const width = entry.target.getAttribute('data-width');
-                    entry.target.style.width = width;
+                    // If it's a progress bar, animate it
+                    if (entry.target.classList.contains('skill-progress')) {
+                        const width = entry.target.getAttribute('data-width');
+                        entry.target.style.width = width;
+                    }
                 }
-            }
-        });
-    }, observerOptions);
+            });
+        }, observerOptions);
 
-    document.querySelectorAll('.timeline-item, .skill-category, .achievement-card, .skill-progress').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Stats counter animation
-    const statsSection = document.querySelector('.stats');
-    const statNumbers = document.querySelectorAll('.stat-number');
-    let statsAnimated = false;
-
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !statsAnimated) {
-                statNumbers.forEach((numberEl, index) => {
-                    const target = +numberEl.innerText.replace('+', '');
-                    let count = 0;
-                    const duration = 2000;
-                    const increment = target / (duration / 16);
-
-                    const updateCount = () => {
-                        if (count < target) {
-                            count += increment;
-                            numberEl.innerText = index === 0 || index === 3 ?
-                                Math.ceil(count) + '+' :
-                                Math.ceil(count).toFixed(index === 1 ? 2 : 0);
-                            setTimeout(updateCount, 16);
-                        } else {
-                            numberEl.innerText = index === 0 || index === 3 ?
-                                target + '+' :
-                                target.toFixed(index === 1 ? 2 : 0);
-                        }
-                    };
-
-                    updateCount();
-                });
-
-                statsAnimated = true;
-                statsObserver.unobserve(statsSection);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    statsObserver.observe(statsSection);
-
-    // Add hover effect to all cards
-    document.querySelectorAll('.achievement-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const angleY = (x - centerX) / 10;
-            const angleX = (centerY - y) / 10;
-
-            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
+        document.querySelectorAll('.timeline-item, .skill-category, .achievement-card, .skill-progress').forEach(el => {
+            observer.observe(el);
         });
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        // Stats counter animation
+        const statsSection = document.querySelector('.stats');
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let statsAnimated = false;
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statNumbers.forEach((numberEl, index) => {
+                        const target = +numberEl.innerText.replace('+', '');
+                        let count = 0;
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+
+                        const updateCount = () => {
+                            if (count < target) {
+                                count += increment;
+                                numberEl.innerText = index === 0 || index === 3 ?
+                                    Math.ceil(count) + '+' :
+                                    Math.ceil(count).toFixed(index === 1 ? 2 : 0);
+                                setTimeout(updateCount, 16);
+                            } else {
+                                numberEl.innerText = index === 0 || index === 3 ?
+                                    target + '+' :
+                                    target.toFixed(index === 1 ? 2 : 0);
+                            }
+                        };
+
+                        updateCount();
+                    });
+
+                    statsAnimated = true;
+                    statsObserver.unobserve(statsSection);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+
+        // Add hover effect to all cards
+        document.querySelectorAll('.achievement-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const angleY = (x - centerX) / 10;
+                const angleX = (centerY - y) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
         });
-    });
 
-    // EDITH AI Assistant Functionality
-    const edithChatIcon = document.getElementById('edithChatIcon');
-    const edithChatContainer = document.getElementById('edithChatContainer');
-    const edithClose = document.getElementById('edithClose');
-    const edithChatMessages = document.getElementById('edithChatMessages');
-    const edithInput = document.getElementById('edithInput');
-    const edithSend = document.getElementById('edithSend');
-    const ttsToggle = document.getElementById('tts-toggle');
-    const voiceIndicator = document.getElementById('voiceIndicator');
-    const fastModeToggle = document.getElementById('fast-mode');
-    const edithLogo = document.querySelector('.edith-logo');
-    const edithTheme = document.getElementById('edith-theme');
+        // EDITH AI Assistant Functionality
+        const edithChatIcon = document.getElementById('edithChatIcon');
+        const edithChatContainer = document.getElementById('edithChatContainer');
+        const edithClose = document.getElementById('edithClose');
+        const edithChatMessages = document.getElementById('edithChatMessages');
+        const edithInput = document.getElementById('edithInput');
+        const edithSend = document.getElementById('edithSend');
+        const ttsToggle = document.getElementById('tts-toggle');
+        const voiceIndicator = document.getElementById('voiceIndicator');
+        const fastModeToggle = document.getElementById('fast-mode');
+        const edithLogo = document.querySelector('.edith-logo');
+        const edithTheme = document.getElementById('edith-theme');
 
-    // EDITH responses
-    const responses = {
-        "hello": "Hello! I'm EDITH,personal AI assistant. How can I help you with Vishal's portfolio?",
-        "hi": "Hi there! How can I assist you today?",
-        "naa dan batman": "naa dan spider-man",
-        "who are you": "I am EDITH (Enhanced Digital Interface for Tech & Help), an AI assistant created to help you navigate Vishal's portfolio. My design is inspired by Stark Industries technology.",
-        "skills": "<strong>Vishal's Technical Skills:</strong><br>" +
-            "• <span style='color:#64ffda'>Hardware & Embedded:</span> ESP32 (90%), Arduino (85%), Embedded Systems (80%)<br>" +
-            "• <span style='color:#64ffda'>Programming:</span> C/C++ (95%), Python (90%), Java (75%), SQL (70%)<br>" +
-            "• <span style='color:#64ffda'>Development:</span> GUI Development (80%), Web Development (70%)<br>" +
-            "• <span style='color:#64ffda'>Soft Skills:</span> Leadership (90%), Team Management (85%)",
-        "education": "<strong>Education:</strong><br>" +
-            "• <span style='color:#64ffda'>Chennai Institute of Technology</span> (2024-2028)<br>" +
-            "&nbsp;&nbsp;B.E. Electronics and Communication Engineering<br>" +
-            "&nbsp;&nbsp;GPA: 8.35<br><br>" +
-            "• <span style='color:#64ffda'>TI School</span> (2022-2024)<br>" +
-            "&nbsp;&nbsp;Higher Secondary Education<br>" +
-            "&nbsp;&nbsp;Stream: Mathematics & Computer Science<br><br>" +
-            "<strong>Experience:</strong><br>" +
-            "• <span style='color:#64ffda'>IMD Chennai - Internship</span> (May 2025 - June 2025)<br>" +
-            "&nbsp;&nbsp;Built Doppler weather radar model using ESP32<br>" +
-            "&nbsp;&nbsp;Developed GUI interface and worked with motor precision",
-        "contact": "<strong>Contact Vishal:</strong><br>" +
-            "• <span style='color:#64ffda'>Phone:</span> +91 637970766<br>" +
-            "• <span style='color:#64ffda'>Email:</span> vishalmeyyappan@gmail.com<br>" +
-            "• <span style='color:#64ffda'>Location:</span> Ambattur, Chennai<br><br>" +
-            "<strong>Connect:</strong><br>" +
-            "• <span style='color:#64ffda'>LinkedIn:</span> linkedin.com/in/vishalmeyyappanr<br>" +
-            "• <span style='color:#64ffda'>GitHub:</span> github.com/vishal-r07",
-        "achievements": "<strong>Notable Achievements:</strong><br>" +
-            "• PCAP: Programming Essentials in Python (Cisco)<br>" +
-            "• CLA: Programming Essentials in C (Cisco)<br>" +
-            "• CODEY Robotics Course (SP Robotics)<br>" +
-            "• Learning Arduino: Foundation (LinkedIn)<br>" +
-            "• Supervised Machine Learning (Stanford)<br>" +
-            "• Photography Club President at TI School",
-        "projects": "<strong>Featured Projects:</strong><br>" +
-            "• <span style='color:#64ffda'>Doppler Weather Radar Model</span> - Built during IMD Chennai internship<br>" +
-            "&nbsp;&nbsp;Developed using ESP32 with custom GUI<br><br>"  +
-            "• <span style='color:#64ffda'>Ultrasonic Sensor based radar detection for obstacle avoidance</span> - IOT project<br>" +
-            "&nbsp;&nbsp;Predictive target by fixing at the purticular angle rotation",
-        "about vishal": "<strong>About Vishal Meyyappan R.:</strong><br>" +
-            "• Second-year Electronics and Communication Engineering student<br>" +
-            "• Passionate about embedded systems, IoT, and AI integration<br>" +
-            "• Skilled in C/C++, Python, and hardware development<br>" +
-            "• Completed internship at IMD Chennai building radar systems<br>" +
-            "• Solved 1100+ coding problems on SkillRack<br>" +
-            "• Current CGPA: 8.35",
-        "help": "<strong>Available Commands:</strong><br>" +
-            "• 'Who are you?' - Learn about EDITH<br>" +
-            "• 'Skills' - View Vishal's technical skills<br>" +
-            "• 'Education' - See Vishal's education history<br>" +
-            "• 'Contact' - Get Vishal's contact information<br>" +
-            "• 'Achievements' - View certifications and accomplishments<br>" +
-            "• 'Projects' - See Vishal's featured projects<br>" +
-            "• 'About Vishal' - Learn more about Vishal"
-    };
+        // EDITH responses
+        const responses = {
+            "hello": "Hello! I'm EDITH,personal AI assistant. How can I help you with Vishal's portfolio?",
+            "hi": "Hi there! How can I assist you today?",
+            "naa dan batman": "naa dan spider-man",
+            "who are you": "I am EDITH (Enhanced Digital Interface for Tech & Help), an AI assistant created to help you navigate Vishal's portfolio. My design is inspired by Stark Industries technology.",
+            "skills": "<strong>Vishal's Technical Skills:</strong><br>" +
+                "• <span style='color:#64ffda'>Hardware & Embedded:</span> ESP32 (90%), Arduino (85%), Embedded Systems (80%)<br>" +
+                "• <span style='color:#64ffda'>Programming:</span> C/C++ (95%), Python (90%), Java (75%), SQL (70%)<br>" +
+                "• <span style='color:#64ffda'>Development:</span> GUI Development (80%), Web Development (70%)<br>" +
+                "• <span style='color:#64ffda'>Soft Skills:</span> Leadership (90%), Team Management (85%)",
+            "education": "<strong>Education:</strong><br>" +
+                "• <span style='color:#64ffda'>Chennai Institute of Technology</span> (2024-2028)<br>" +
+                "&nbsp;&nbsp;B.E. Electronics and Communication Engineering<br>" +
+                "&nbsp;&nbsp;GPA: 8.35<br><br>" +
+                "• <span style='color:#64ffda'>TI School</span> (2022-2024)<br>" +
+                "&nbsp;&nbsp;Higher Secondary Education<br>" +
+                "&nbsp;&nbsp;Stream: Mathematics & Computer Science<br><br>" +
+                "<strong>Experience:</strong><br>" +
+                "• <span style='color:#64ffda'>IMD Chennai - Internship</span> (May 2025 - June 2025)<br>" +
+                "&nbsp;&nbsp;Built Doppler weather radar model using ESP32<br>" +
+                "&nbsp;&nbsp;Developed GUI interface and worked with motor precision",
+            "contact": "<strong>Contact Vishal:</strong><br>" +
+                "• <span style='color:#64ffda'>Phone:</span> +91 637970766<br>" +
+                "• <span style='color:#64ffda'>Email:</span> vishalmeyyappan@gmail.com<br>" +
+                "• <span style='color:#64ffda'>Location:</span> Ambattur, Chennai<br><br>" +
+                "<strong>Connect:</strong><br>" +
+                "• <span style='color:#64ffda'>LinkedIn:</span> linkedin.com/in/vishalmeyyappanr<br>" +
+                "• <span style='color:#64ffda'>GitHub:</span> github.com/vishal-r07",
+            "achievements": "<strong>Notable Achievements:</strong><br>" +
+                "• PCAP: Programming Essentials in Python (Cisco)<br>" +
+                "• CLA: Programming Essentials in C (Cisco)<br>" +
+                "• CODEY Robotics Course (SP Robotics)<br>" +
+                "• Learning Arduino: Foundation (LinkedIn)<br>" +
+                "• Supervised Machine Learning (Stanford)<br>" +
+                "• Photography Club President at TI School",
+            "projects": "<strong>Featured Projects:</strong><br>" +
+                "• <span style='color:#64ffda'>Doppler Weather Radar Model</span> - Built during IMD Chennai internship<br>" +
+                "&nbsp;&nbsp;Developed using ESP32 with custom GUI<br><br>"  +
+                "• <span style='color:#64ffda'>Ultrasonic Sensor based radar detection for obstacle avoidance</span> - IOT project<br>" +
+                "&nbsp;&nbsp;Predictive target by fixing at the purticular angle rotation",
+            "about vishal": "<strong>About Vishal Meyyappan R.:</strong><br>" +
+                "• Second-year Electronics and Communication Engineering student<br>" +
+                "• Passionate about embedded systems, IoT, and AI integration<br>" +
+                "• Skilled in C/C++, Python, and hardware development<br>" +
+                "• Completed internship at IMD Chennai building radar systems<br>" +
+                "• Solved 1100+ coding problems on SkillRack<br>" +
+                "• Current CGPA: 8.35",
+            "help": "<strong>Available Commands:</strong><br>" +
+                "• 'Who are you?' - Learn about EDITH<br>" +
+                "• 'Skills' - View Vishal's technical skills<br>" +
+                "• 'Education' - See Vishal's education history<br>" +
+                "• 'Contact' - Get Vishal's contact information<br>" +
+                "• 'Achievements' - View certifications and accomplishments<br>" +
+                "• 'Projects' - See Vishal's featured projects<br>" +
+                "• 'About Vishal' - Learn more about Vishal"
+        };
 
-    // Thinking messages for typing simulation
-    const thinkingMessages = [
-        "Hmm... accessing memory modules ● ● ●",
-        "Processing request... cross-referencing databases ● ● ●",
-        "Analyzing query parameters ● ● ●",
-        "Compiling response from neural network ● ● ●",
-        "Just a moment... calculating optimal answer ● ● ●",
-        "Interesting question... searching knowledge base ● ● ●"
-    ];
-
-    // Toggle chat container
-    edithChatIcon.addEventListener('click', () => {
-        edithChatContainer.classList.add('open');
-        // Play theme on open
-        edithTheme.currentTime = 0;
-        edithTheme.volume = 0.3;
-        edithTheme.play().catch(e => console.log("Audio play failed:", e));
-    });
-
-    edithClose.addEventListener('click', () => {
-        edithChatContainer.classList.remove('open');
-        // Stop any ongoing speech when closing
-        if (window.speechSynthesis.speaking) {
-            window.speechSynthesis.cancel();
-            voiceIndicator.style.display = 'none';
-            edithLogo.classList.remove('speaking');
-        }
-    });
-
-    // Strip HTML tags for TTS
-    function stripHtml(html) {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        return doc.body.textContent || "";
-    }
-
-    // Text-to-Speech Function with expressive settings
-    function speakText(text) {
-        // Cancel any ongoing speech
-        if (window.speechSynthesis.speaking) {
-            window.speechSynthesis.cancel();
-        }
-
-        // Strip HTML tags
-        const cleanText = stripHtml(text);
-
-        // Create utterance
-        const utterance = new SpeechSynthesisUtterance(cleanText);
-
-        // Configure voice settings for expressiveness
-        utterance.lang = 'en-US';
-        utterance.rate = 1.05;   // Slightly faster than normal
-        utterance.pitch = 1.2;    // Higher pitch for expressiveness
-        utterance.volume = 0.95;  // Slightly reduced volume
-
-        // Set voice to a more natural-sounding one if available
-        const voices = speechSynthesis.getVoices();
-        const preferredVoices = [
-            "Microsoft Zira",
-            "Google UK English Female",
-            "Alex",
-            "Samantha"
+        // Thinking messages for typing simulation
+        const thinkingMessages = [
+            "Hmm... accessing memory modules ● ● ●",
+            "Processing request... cross-referencing databases ● ● ●",
+            "Analyzing query parameters ● ● ●",
+            "Compiling response from neural network ● ● ●",
+            "Just a moment... calculating optimal answer ● ● ●",
+            "Interesting question... searching knowledge base ● ● ●"
         ];
 
-        // Find the best available voice
-        for (const voice of voices) {
-            if (preferredVoices.includes(voice.name)) {
-                utterance.voice = voice;
-                break;
+        // Toggle chat container
+        edithChatIcon.addEventListener('click', () => {
+            edithChatContainer.classList.add('open');
+            // Play theme on open
+            edithTheme.currentTime = 0;
+            edithTheme.volume = 0.3;
+            edithTheme.play().catch(e => console.log("Audio play failed:", e));
+        });
+
+        edithClose.addEventListener('click', () => {
+            edithChatContainer.classList.remove('open');
+            // Stop any ongoing speech when closing
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                voiceIndicator.style.display = 'none';
+                edithLogo.classList.remove('speaking');
             }
+        });
+
+        // Strip HTML tags for TTS
+        function stripHtml(html) {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            return doc.body.textContent || "";
         }
 
-        // Show voice animation while speaking
-        voiceIndicator.style.display = 'flex';
-        edithLogo.classList.add('speaking');
+        // Text-to-Speech Function with expressive settings
+        function speakText(text) {
+            // Cancel any ongoing speech
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+            }
 
-        // Event when speech starts
-        utterance.onstart = () => {
-            voiceIndicator.style.display = 'flex';
-            edithLogo.classList.add('speaking');
-        };
+            // Strip HTML tags
+            const cleanText = stripHtml(text);
 
-        // Event when speech ends
-        utterance.onend = () => {
-            voiceIndicator.style.display = 'none';
-            edithLogo.classList.remove('speaking');
-            stopWaveform();
-        };
+            // Create utterance
+            const utterance = new SpeechSynthesisUtterance(cleanText);
 
-        // Show waveform
-        startWaveform();
+            // Configure voice settings for expressiveness
+            utterance.lang = 'en-US';
+            utterance.rate = 1.05;   // Slightly faster than normal
+            utterance.pitch = 1.2;    // Higher pitch for expressiveness
+            utterance.volume = 0.95;  // Slightly reduced volume
 
-        // Speak the text
-        speechSynthesis.speak(utterance);
-    }
+            // Set voice to a more natural-sounding one if available
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                "Microsoft Zira",
+                "Google UK English Female",
+                "Alex",
+                "Samantha"
+            ];
 
-    // Add message to chat
-    function addMessage(text, isUser = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('edith-message');
-        messageDiv.classList.add(isUser ? 'user-message' : 'edith-response');
-
-        // Format response if it contains HTML
-        if (!isUser && text.includes('<')) {
-            messageDiv.innerHTML = isUser ?
-                `<strong>You:</strong> ${text}` :
-                `<strong>EDITH:</strong> ${text}`;
-        } else {
-            messageDiv.innerHTML = isUser ?
-                `<strong>You:</strong> ${text}` :
-                `<strong>EDITH:</strong> ${text}`;
-        }
-
-        edithChatMessages.appendChild(messageDiv);
-        edithChatMessages.scrollTop = edithChatMessages.scrollHeight;
-
-        // Speak EDITH's response if TTS is enabled
-        if (!isUser && ttsToggle.checked) {
-            speakText(text);
-        }
-    }
-
-    // Show typing indicator with a random thinking message
-    function showTyping() {
-        const typingDiv = document.createElement('div');
-        typingDiv.classList.add('edith-typing');
-
-        // Select a random thinking message
-        const thinkingMessage = thinkingMessages[Math.floor(Math.random() * thinkingMessages.length)];
-
-        typingDiv.innerHTML = thinkingMessage;
-        edithChatMessages.appendChild(typingDiv);
-        edithChatMessages.scrollTop = edithChatMessages.scrollHeight;
-        return typingDiv;
-    }
-
-    // Process user input with typing simulation
-    function processInput() {
-        const input = edithInput.value.trim().toLowerCase();
-        if (!input) return;
-
-        // Add user message
-        addMessage(input, true);
-        edithInput.value = '';
-
-        // Show typing indicator
-        const typing = showTyping();
-
-        // Determine delay based on fast mode
-        const delay = fastModeToggle.checked ? 500 : 1500;
-
-        // Process after a short delay to simulate thinking
-        setTimeout(() => {
-            edithChatMessages.removeChild(typing);
-
-            let response = "I'm sorry, I didn't understand that command. Type 'help' for available commands.";
-
-            // Find matching response
-            for (const [key, value] of Object.entries(responses)) {
-                if (input.includes(key)) {
-                    response = value;
+            // Find the best available voice
+            for (const voice of voices) {
+                if (preferredVoices.includes(voice.name)) {
+                    utterance.voice = voice;
                     break;
                 }
             }
 
-            // Add EDITH response
-            addMessage(response);
-        }, delay);
-    }
+            // Show voice animation while speaking
+            voiceIndicator.style.display = 'flex';
+            edithLogo.classList.add('speaking');
 
-    // Event listeners for EDITH
-    edithSend.addEventListener('click', processInput);
+            // Event when speech starts
+            utterance.onstart = () => {
+                voiceIndicator.style.display = 'flex';
+                edithLogo.classList.add('speaking');
+            };
 
-    edithInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            processInput();
-        }
-    });
+            // Event when speech ends
+            utterance.onend = () => {
+                voiceIndicator.style.display = 'none';
+                edithLogo.classList.remove('speaking');
+            };
 
-    // Toggle TTS functionality
-    ttsToggle.addEventListener('change', () => {
-        if (!ttsToggle.checked && speechSynthesis.speaking) {
-            speechSynthesis.cancel();
-            voiceIndicator.style.display = 'none';
-            edithLogo.classList.remove('speaking');
-        }
-    });
-
-    // Add initial welcome message
-    setTimeout(() => {
-        addMessage("Welcome to Vishal's portfolio! I'm EDITH, your AI assistant. How can I help you explore his work and achievements?");
-    }, 1000);
-
-    // Preload voices for TTS
-    window.speechSynthesis.onvoiceschanged = function() {
-        // This ensures voices are loaded and available
-    };
-
-    // Marvel Timeline Animation
-    document.addEventListener('DOMContentLoaded', function() {
-        const missionCards = document.querySelectorAll('.mission-card');
-        const timelineBar = document.querySelector('.timeline-bar');
-        let revealed = 0;
-
-        function revealMissions() {
-            let delay = 0;
-            missionCards.forEach((card, idx) => {
-                setTimeout(() => {
-                    card.classList.add('visible');
-                    revealed = idx + 1;
-                    // Animate progress bar
-                    if (timelineBar) {
-                        timelineBar.style.height = ((revealed / missionCards.length) * 100) + '%';
-                    }
-                }, 400 + idx * 400);
-            });
+            // Speak the text
+            speechSynthesis.speak(utterance);
         }
 
-        // Reveal on scroll into view
-        const timelineSection = document.querySelector('#education');
-        if (timelineSection) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        revealMissions();
-                        observer.unobserve(timelineSection);
-                    }
-                });
-            }, { threshold: 0.3 });
-            observer.observe(timelineSection);
-        }
+        // Add message to chat
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('edith-message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'edith-response');
 
-        // Optional: Easter egg animation for secret mission
-        const secretMission = document.querySelector('.secret-mission');
-        if (secretMission) {
-            secretMission.addEventListener('mouseenter', () => {
-                secretMission.style.boxShadow = '0 0 60px #FFD700, 0 0 0 8px #FFD70033';
-            });
-            secretMission.addEventListener('mouseleave', () => {
-                secretMission.style.boxShadow = '0 0 40px #FFD70055';
-            });
-        }
-    });
-
-    // Gamified confetti effect for secret mission
-    document.querySelectorAll('.claim-reward-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            const card = btn.closest('.secret-mission');
-            const confetti = card.querySelector('.confetti');
-            confetti.innerHTML = '';
-            confetti.style.display = 'block';
-            for(let i=0;i<40;i++){
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                piece.style.left = Math.random()*90+5+'%';
-                piece.style.background = `linear-gradient(135deg, #FFD700, #64ffda, #9d4edd)`;
-                piece.style.animationDelay = (Math.random()*0.7)+'s';
-                confetti.appendChild(piece);
+            // Format response if it contains HTML
+            if (!isUser && text.includes('<')) {
+                messageDiv.innerHTML = isUser ?
+                    `<strong>You:</strong> ${text}` :
+                    `<strong>EDITH:</strong> ${text}`;
+            } else {
+                messageDiv.innerHTML = isUser ?
+                    `<strong>You:</strong> ${text}` :
+                    `<strong>EDITH:</strong> ${text}`;
             }
-            setTimeout(()=>{ confetti.style.display='none'; }, 2000);
+
+            edithChatMessages.appendChild(messageDiv);
+            edithChatMessages.scrollTop = edithChatMessages.scrollHeight;
+
+            // Speak EDITH's response if TTS is enabled
+            if (!isUser && ttsToggle.checked) {
+                speakText(text);
+            }
+        }
+
+        // Show typing indicator with a random thinking message
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('edith-typing');
+
+            // Select a random thinking message
+            const thinkingMessage = thinkingMessages[Math.floor(Math.random() * thinkingMessages.length)];
+
+            typingDiv.innerHTML = thinkingMessage;
+            edithChatMessages.appendChild(typingDiv);
+            edithChatMessages.scrollTop = edithChatMessages.scrollHeight;
+            return typingDiv;
+        }
+
+        // Process user input with typing simulation
+        function processInput() {
+            const input = edithInput.value.trim().toLowerCase();
+            if (!input) return;
+
+            // Add user message
+            addMessage(input, true);
+            edithInput.value = '';
+
+            // Show typing indicator
+            const typing = showTyping();
+
+            // Determine delay based on fast mode
+            const delay = fastModeToggle.checked ? 500 : 1500;
+
+            // Process after a short delay to simulate thinking
+            setTimeout(() => {
+                edithChatMessages.removeChild(typing);
+
+                let response = "I'm sorry, I didn't understand that command. Type 'help' for available commands.";
+
+                // Find matching response
+                for (const [key, value] of Object.entries(responses)) {
+                    if (input.includes(key)) {
+                        response = value;
+                        break;
+                    }
+                }
+
+                // Add EDITH response
+                addMessage(response);
+            }, delay);
+        }
+
+        // Event listeners for EDITH
+        edithSend.addEventListener('click', processInput);
+
+        edithInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                processInput();
+            }
         });
-    });
 
-    // Audio waveform animation for EDITH TTS
-    const edithAudioWaveform = document.getElementById('edithAudioWaveform');
-    let waveformInterval = null;
-    function startWaveform() {
-        edithAudioWaveform.style.display = 'block';
-        const ctx = edithAudioWaveform.getContext('2d');
-        let t = 0;
-        function draw() {
-            ctx.clearRect(0, 0, edithAudioWaveform.width, edithAudioWaveform.height);
-            const bars = 32;
-            const w = edithAudioWaveform.width / bars;
-            for (let i = 0; i < bars; i++) {
-                const h = 10 + Math.abs(Math.sin(t + i/3 + Math.sin(t/2 + i))) * 18 + Math.random()*6;
-                ctx.fillStyle = `rgba(100,255,218,0.8)`;
-                ctx.fillRect(i * w + 2, edithAudioWaveform.height/2 - h/2, w-4, h);
+        // Toggle TTS functionality
+        ttsToggle.addEventListener('change', () => {
+            if (!ttsToggle.checked && speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                voiceIndicator.style.display = 'none';
+                edithLogo.classList.remove('speaking');
             }
-            t += 0.13;
-        }
-        if (!edithAudioWaveform.width) {
-            edithAudioWaveform.width = edithAudioWaveform.offsetWidth;
-            edithAudioWaveform.height = edithAudioWaveform.offsetHeight;
-        }
-        waveformInterval = setInterval(draw, 40);
-    }
-    function stopWaveform() {
-        edithAudioWaveform.style.display = 'none';
-        if (waveformInterval) clearInterval(waveformInterval);
-        waveformInterval = null;
-    }
-    // Also stop waveform if TTS is cancelled
-    if (window.speechSynthesis) {
-        const origCancel = window.speechSynthesis.cancel;
-        window.speechSynthesis.cancel = function() {
-            stopWaveform();
-            return origCancel.apply(this, arguments);
-        };
-    }
+        });
 
-    // In JS, make waveform canvas always fit container on resize
-    window.addEventListener('resize', function() {
-        if (edithAudioWaveform) {
-            edithAudioWaveform.width = edithAudioWaveform.offsetWidth;
-            edithAudioWaveform.height = edithAudioWaveform.offsetHeight;
-        }
-    });
-</script>
-</body>
-</html>
+        // Add initial welcome message
+        setTimeout(() => {
+            addMessage("Welcome to Vishal's portfolio! I'm EDITH, your AI assistant. How can I help you explore his work and achievements?");
+        }, 1000);
+
+        // Preload voices for TTS
+        window.speechSynthesis.onvoiceschanged = function() {
+            // This ensures voices are loaded and available
+        };
+
+        // Marvel Timeline Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const missionCards = document.querySelectorAll('.mission-card');
+            const timelineBar = document.querySelector('.timeline-bar');
+            let revealed = 0;
+
+            function revealMissions() {
+                let delay = 0;
+                missionCards.forEach((card, idx) => {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                        revealed = idx + 1;
+                        // Animate progress bar
+                        if (timelineBar) {
+                            timelineBar.style.height = ((revealed / missionCards.length) * 100) + '%';
+                        }
+                    }, 400 + idx * 400);
+                });
+            }
+
+            // Reveal on scroll into view
+            const timelineSection = document.querySelector('#education');
+            if (timelineSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            revealMissions();
+                            observer.unobserve(timelineSection);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(timelineSection);
+            }
+
+            // Optional: Easter egg animation for secret mission
+            const secretMission = document.querySelector('.secret-mission');
+            if (secretMission) {
+                secretMission.addEventListener('mouseenter', () => {
+                    secretMission.style.boxShadow = '0 0 60px #FFD700, 0 0 0 8px #FFD70033';
+                });
+                secretMission.addEventListener('mouseleave', () => {
+                    secretMission.style.boxShadow = '0 0 40px #FFD70055';
+                });
+            }
+        });
+
+        // Gamified confetti effect for secret mission
+        document.querySelectorAll('.claim-reward-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const card = btn.closest('.secret-mission');
+                const confetti = card.querySelector('.confetti');
+                confetti.innerHTML = '';
+                confetti.style.display = 'block';
+                for(let i=0;i<40;i++){
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random()*90+5+'%';
+                    piece.style.background = `linear-gradient(135deg, #FFD700, #64ffda, #9d4edd)`;
+                    piece.style.animationDelay = (Math.random()*0.7)+'s';
+                    confetti.appendChild(piece);
+                }
+                setTimeout(()=>{ confetti.style.display='none'; }, 2000);
+            });
+        });
+    </script>
+    </body>
+    </html>
