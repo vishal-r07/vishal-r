@@ -3533,75 +3533,123 @@
                         right: auto !important;
                     }
                 }
+
+                /* =================== LOADER CSS =================== */
+                #loader {
+                    position: fixed;
+                    inset: 0;
+                    background: var(--void-black);
+                    z-index: var(--z-loader);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    transition: opacity 0.5s ease-out;
+                }
+
+                #loader.hidden {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                #loader-terminal {
+                    width: 80vw;
+                    max-width: 600px;
+                    height: 200px;
+                    font-family: var(--font-mono);
+                    font-size: 0.9rem;
+                    overflow: hidden;
+                    margin-bottom: var(--space-4);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    color: var(--text-primary);
+                }
             </style>
+            </head>
 
-            <div class="section-container">
-                <div class="section-header">
-                    <span class="section-tag">// EXPERIENCE & EDUCATION</span>
-                    <h2 class="section-title">My Journey So Far</h2>
-                    <p class="section-subtitle">Building expertise through hands-on experience</p>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-icon">🛰️</span>
-                            <span class="timeline-date">May - June 2025</span>
-                            <h4 class="timeline-title">Weather Radar Intern</h4>
-                            <p class="timeline-company">India Meteorological Department (IMD), Chennai</p>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li>Designed and developed a working Doppler Radar prototype from scratch</li>
-                                    <li>Contributed to GUI design, ESP32 programming, and complete electrical
-                                        integration
-                                    </li>
-                                    <li>Enabled real-time azimuth and elevation control</li>
-                                    <li>Worked with motor accuracy tuning, oscilloscope waveform analysis, encoders,
-                                        gear
-                                        mechanics</li>
-                                    <li>AutoCAD-based 3D design for mechanical components</li>
-                                </ul>
-                            </div>
+            <body>
+                <!-- =================== LOADER =================== -->
+                <div id="loader">
+                    <div id="loader-terminal"></div>
+                    <div class="loader-progress">
+                        <div class="loader-progress-bar">
+                            <div id="loader-progress" class="loader-progress-fill"></div>
                         </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-icon">🎓</span>
-                            <span class="timeline-date">Sept 2024 - Present</span>
-                            <h4 class="timeline-title">B.E. Electronics and Communication Engineering</h4>
-                            <p class="timeline-company">Chennai Institute of Technology</p>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li>Specialization: Advanced Communication Technology</li>
-                                    <li>Current CGPA: 7.89</li>
-                                    <li>Active in hackathons and research projects</li>
-                                    <li>Smart India Hackathon 2025 Finalist</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-icon">📸</span>
-                            <span class="timeline-date">2023 - 2024</span>
-                            <h4 class="timeline-title">Photography Club President</h4>
-                            <p class="timeline-company">TI School</p>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li>Managed 150+ members in the club</li>
-                                    <li>Organized intra-school competitions</li>
-                                    <li>Developed event management and team leadership skills</li>
-                                </ul>
-                            </div>
+                        <div class="loader-progress-text">
+                            <span>SYSTEM INITIALIZATION</span>
+                            <span id="loader-percent">0%</span>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="section-container">
+                    <div class="section-header">
+                        <span class="section-tag">// EXPERIENCE & EDUCATION</span>
+                        <h2 class="section-title">My Journey So Far</h2>
+                        <p class="section-subtitle">Building expertise through hands-on experience</p>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-icon">🛰️</span>
+                                <span class="timeline-date">May - June 2025</span>
+                                <h4 class="timeline-title">Weather Radar Intern</h4>
+                                <p class="timeline-company">India Meteorological Department (IMD), Chennai</p>
+                                <div class="timeline-description">
+                                    <ul>
+                                        <li>Designed and developed a working Doppler Radar prototype from scratch</li>
+                                        <li>Contributed to GUI design, ESP32 programming, and complete electrical
+                                            integration
+                                        </li>
+                                        <li>Enabled real-time azimuth and elevation control</li>
+                                        <li>Worked with motor accuracy tuning, oscilloscope waveform analysis, encoders,
+                                            gear
+                                            mechanics</li>
+                                        <li>AutoCAD-based 3D design for mechanical components</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-icon">🎓</span>
+                                <span class="timeline-date">Sept 2024 - Present</span>
+                                <h4 class="timeline-title">B.E. Electronics and Communication Engineering</h4>
+                                <p class="timeline-company">Chennai Institute of Technology</p>
+                                <div class="timeline-description">
+                                    <ul>
+                                        <li>Specialization: Advanced Communication Technology</li>
+                                        <li>Current CGPA: 7.89</li>
+                                        <li>Active in hackathons and research projects</li>
+                                        <li>Smart India Hackathon 2025 Finalist</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-icon">📸</span>
+                                <span class="timeline-date">2023 - 2024</span>
+                                <h4 class="timeline-title">Photography Club President</h4>
+                                <p class="timeline-company">TI School</p>
+                                <div class="timeline-description">
+                                    <ul>
+                                        <li>Managed 150+ members in the club</li>
+                                        <li>Organized intra-school competitions</li>
+                                        <li>Developed event management and team leadership skills</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
 
         <!-- =================== PROJECTS SECTION =================== -->
@@ -7306,7 +7354,12 @@
             gsap.to('#intro-ui', {
                 opacity: 0,
                 duration: 0.8,
-                ease: "power2.in"
+                ease: "power2.in",
+                onComplete: () => {
+                    // Ensure main interface is visible
+                    const introWorld = document.getElementById('intro-world');
+                    if (introWorld) introWorld.style.display = 'none';
+                }
             });
 
             // After animation, hide intro and show portfolio
