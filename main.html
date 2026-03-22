@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    if (!sessionStorage.getItem('introPlayed')) {
+      sessionStorage.setItem('introPlayed', 'true');
+      window.location.replace('intro/index.html');
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Vishal Meyyappan R — Electronics engineer bridging human intent and physical action.">
+  <title>Vishal Meyyappan R. — Hardware Engineer</title>
+  <link rel="stylesheet" href="assets/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+</head>
+
+<body class="theme-dark">
+
+  <!-- Cinematic Film Grain & Vignette -->
+  <div class="noise"></div>
+  <div class="vignette"></div>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-text">
+      <span>V</span><span>i</span><span>s</span><span>h</span><span>a</span><span>l</span><span>.</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-logo">Vishal Meyyappan R</div>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Work</a>
+      <a href="achievements.html" class="nav-link">Achievements</a>
+      <a href="#experience" class="nav-link">Journey</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero container">
+    <div class="hero-content">
+      <h1 class="hero-title cyber-scramble">Personal</h1>
+      <span class="hero-title-serif cyber-scramble text-italic" style="color:var(--accent);">Portfolio.</span>
+    </div>
+
+    <div class="hero-bottom">
+      <p class="hero-desc reveal-fade delay-2">
+        I don't just build circuits. I build the invisible bridges that connect human intent to physical action.
+      </p>
+      <div class="hero-scroll">Scroll to explore</div>
+    </div>
+  </header>
+
+  <!-- ULTRA-PREMIUM NEAT CTA -->
+  <section class="achievements-premium-link container reveal-fade delay-2">
+    <a href="achievements.html" class="premium-btn-wrapper">
+      <div class="premium-btn-content">
+        <span class="premium-btn-title">Hackathon Victories & Awards</span>
+        <span class="premium-btn-subtitle">Explore the 3x National Hat-Trick ↗</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- Statement / Profile -->
+  <section id="about" class="statement container">
+    <div class="statement-grid">
+      <div class="statement-text">
+        I’m Vishal, an ECE student who loves turning ideas into real-world tech projects. From IoT systems to AI-based
+        solutions, I enjoy building, experimenting, and pushing my limits in hardware and software development.
+      </div>
+      <div class="statement-image-wrapper">
+        <img src="photos of vishal/vishal3.jpeg" alt="Vishal Meyyappan R" class="profile-img-uncropped">
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics / Proof -->
+  <section class="metrics container">
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-num">03</div>
+        <div class="metric-label">Consecutive Wins</div>
+        <div class="metric-desc">Three back-to-back hackathon victories. Proof of a repeatable pattern of rapid
+          execution.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">N2</div>
+        <div class="metric-label">Mandarin (TOCFL)</div>
+        <div class="metric-desc">Certified fluency in Mandarin. A rare differentiator for global hardware communication.
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">01</div>
+        <div class="metric-label">Radar Built</div>
+        <div class="metric-desc">Engineered a complete Doppler radar prototype during my internship at the India Met
+          Dept.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">1.2k</div>
+        <div class="metric-label">Problems Solved</div>
+        <div class="metric-desc">Over 1,200 algorithmic challenges completed across SkillRack and LeetCode.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected Artifacts (Sticky Stack) -->
+  <section id="projects" class="projects container">
+    <div class="projects-header">
+      <h2 class="projects-title reveal-text">Selected</h2>
+      <div class="projects-subtitle outline-text reveal-text delay-1">Artifacts</div>
+    </div>
+
+    <div class="projects-stack-container">
+
+      <!-- Project 1 -->
+      <article class="project-card sticky-card">
+        <div class="project-info">
+          <div>
+            <h3 class="project-name">Distributed Sensor Network</h3>
+            <div class="project-meta">
+              <span>Hardware · Multi-Node · CAN Protocol</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            Engineered a multi-node CAN bus communication system with real-time sensor data exchange across ESP32,
+            Arduino, and STM32. Focused on protocol-level control and physical implementation logic rather than
+            high-level abstractions.
+          </p>
+        </div>
+        <div class="project-image-wrap">
+          <div
+            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#0A0A0A; color:#EBE8E1;">
+            <span class="outline-text" style="font-family:var(--serif); font-size:4rem; font-style:italic;">CAN
+              Bus</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project-card sticky-card">
+        <div class="project-info">
+          <div>
+            <h3 class="project-name">ASL Converter</h3>
+            <div class="project-meta">
+              <span>AI · FPGA · Embedded</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            An ML-powered sign language to text and audio converter deployed on an FPGA Krias Board. Designed with deep
+            empathy, translating complex ML inference hardware into a seamless accessibility tool for immediate human
+            use.
+          </p>
+        </div>
+        <div class="project-image-wrap">
+          <div
+            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#121212; color:#EBE8E1;">
+            <span class="outline-text"
+              style="font-family:var(--serif); font-size:4rem; font-style:italic;">Accessibility</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project-card sticky-card">
+        <div class="project-info">
+          <div>
+            <h3 class="project-name">Radar System</h3>
+            <div class="project-meta">
+              <span>ESP32 · Ultrasonic · UI</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            A comprehensive radar detection suite combining Arduino and ESP32 with a custom wireless GUI. This project
+            established the foundation for my subsequent internship at the India Meteorological Department.
+          </p>
+        </div>
+        <div class="project-image-wrap">
+          <div
+            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#1A1A1A; color:#EBE8E1;">
+            <span class="outline-text"
+              style="font-family:var(--serif); font-size:4rem; font-style:italic;">Sensing</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section id="experience" class="experience container">
+    <div class="experience-header">
+      <h2 class="projects-title reveal-text">Professional</h2>
+      <div class="projects-subtitle outline-text reveal-text delay-1">Trajectory</div>
+    </div>
+
+    <div class="experience-list">
+      <div class="experience-item reveal-fade">
+        <div class="exp-date">Jan 2026 — Mar 2026</div>
+        <div>
+          <h3 class="exp-role">National Hackathon Hat-Trick</h3>
+          <div class="exp-company">India-Wide Competitions</div>
+        </div>
+        <ul class="exp-details">
+          <li><strong>₹30K INR First Prize</strong> — NIT Trichy Pragyan Ingenium (Hardware execution).</li>
+          <li><strong>₹15K INR First Prize</strong> — IEEE Pegasus 4.0 (Rapid prototyping).</li>
+          <li><strong>1st Place Winner</strong> — CarbonX VEGATHON 2026 by C-DAC.</li>
+          <li><strong>Finalist</strong> — Smart India Hackathon 2025 (December).</li>
+        </ul>
+      </div>
+
+      <div class="experience-item reveal-fade">
+        <div class="exp-date">May — Jun 2025</div>
+        <div>
+          <h3 class="exp-role"><a
+              href="https://www.linkedin.com/posts/vishalmeyyappanr_internshipexperience-indiameteorologicaldepartment-ugcPost-7345466359268474881-9Gmv?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFBPAIMBrLPZNjVRQ75z7EmdMiUTfUB96Mo"
+              target="_blank" rel="noreferrer" class="magnetic-link">Weather Radar Intern ↗</a></h3>
+          <div class="exp-company">India Meteorological Department, Chennai</div>
+        </div>
+        <ul class="exp-details">
+          <li>Architected a working Doppler Radar prototype from scratch.</li>
+          <li>Engineered real-time azimuth and elevation control systems using ESP32.</li>
+          <li>Integrated AutoCAD 3D mechanical designs with electrical systems.</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="exp-date">Sep 2024 — Present</div>
+        <div>
+          <h3 class="exp-role">B.E. Electronics & Communication Engineering</h3>
+          <h5 class="exp-details">Specialization: Advanced Communication Technologies</h5>
+          <div class="exp-company">Chennai Institute of Technology</div>
+        </div>
+        <ul class="exp-details">
+          <li>Maintained a strong 7.89 CGPA with a focus on Advanced Communication.</li>
+          <li>Became a Finalist in the Smart India Hackathon 2025 (Hardware).</li>
+          <li>Active participation and 3× winner in state-level hackathons.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="skills container">
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h3 class="skill-title">Embedded Systems</h3>
+        <div class="skill-list">
+          <div class="skill-item"><span>ESP32</span>
+            <div class="skill-line"></div><span>92%</span>
+          </div>
+          <div class="skill-item"><span>Arduino</span>
+            <div class="skill-line"></div><span>88%</span>
+          </div>
+          <div class="skill-item"><span>FPGA / Vivado</span>
+            <div class="skill-line"></div><span>75%</span>
+          </div>
+          <div class="skill-item"><span>STM-32</span>
+            <div class="skill-line"></div><span>65%</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3 class="skill-title">Languages</h3>
+        <div class="skill-list">
+          <div class="skill-item"><span>C / C++</span>
+            <div class="skill-line"></div><span>95%</span>
+          </div>
+          <div class="skill-item"><span>Python</span>
+            <div class="skill-line"></div><span>85%</span>
+          </div>
+          <div class="skill-item"><span>Verilog</span>
+            <div class="skill-line"></div><span>80%</span>
+          </div>
+          <div class="skill-item"><span>Java</span>
+            <div class="skill-line"></div><span>72%</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3 class="skill-title">Software & Tools</h3>
+        <div class="skill-list">
+          <div class="skill-item"><span>Proteus</span>
+            <div class="skill-line"></div><span>90%</span>
+          </div>
+          <div class="skill-item"><span>CST Studio</span>
+            <div class="skill-line"></div><span>75%</span>
+          </div>
+          <div class="skill-item"><span>Altium</span>
+            <div class="skill-line"></div><span>72%</span>
+          </div>
+          <div class="skill-item"><span>AutoCAD</span>
+            <div class="skill-line"></div><span>70%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <h2 class="footer-cta">Let's build</h2>
+          <span class="footer-cta-serif">the physical layer.</span>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:vishalmeyyappan@gmail.com" class="footer-link">vishalmeyyappan@gmail.com</a>
+          <a href="tel:+916379703766" class="footer-link">+91 6379703766</a>
+          <a href="https://www.linkedin.com/in/vishalmeyyappanr/" target="_blank" rel="noreferrer"
+            class="footer-link">LinkedIn</a>
+          <a href="https://github.com/vishal-r07" target="_blank" rel="noreferrer" class="footer-link">GitHub</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>Vishal Meyyappan R</div>
+        <div>Hardware Engineer — 2025</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+
+</html>

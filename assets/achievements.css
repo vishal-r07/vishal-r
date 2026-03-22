@@ -1,0 +1,109 @@
+/* ═══════════ ACHIEVEMENTS PAGE STYLES ═══════════ */
+
+.ach-hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: 10vh;
+}
+.ach-hero-content {
+  position: relative;
+  z-index: 2;
+}
+.ach-hero-title {
+  font-family: var(--sans);
+  font-size: clamp(3rem, 10vw, 10rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.ach-hero-title-serif {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(3rem, 10vw, 11rem);
+  font-style: italic;
+  line-height: 0.8;
+  color: var(--accent);
+  margin-left: 8vw;
+}
+
+/* Timeline/Gallery */
+.ach-timeline {
+  padding-bottom: 20vh;
+}
+.ach-item {
+  margin-bottom: 30vh;
+}
+.ach-item-header {
+  margin-bottom: 10vh;
+}
+.ach-item-header.right-align {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.ach-date {
+  font-family: var(--sans);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.ach-title {
+  font-family: var(--sans);
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.ach-meta {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+/* Editorial 12-Column Grid */
+.ach-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2vw;
+  align-items: start;
+}
+.ach-img-wrap, .ach-video-wrap {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-alt);
+  width: 100%;
+}
+.ach-img-wrap img, .ach-video-wrap video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform: scale(1.0);
+}
+
+/* Grid Placement Classes */
+.grid-main { grid-column: 1 / 9; }
+.grid-aside { grid-column: 9 / 13; }
+.grid-half-l { grid-column: 1 / 7; }
+.grid-half-r { grid-column: 7 / 13; }
+.grid-center { grid-column: 3 / 11; }
+
+@media (max-width: 768px) {
+  .ach-item { margin-bottom: 15vh; }
+  .ach-gallery { display: flex; flex-direction: column; gap: 4vh; }
+  .ach-img-wrap, .ach-video-wrap { margin-top: 0 !important; }
+}
